@@ -1,212 +1,1014 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css">
-  <title>My Projects</title>
-</head>
-<body>
-  <!-- SVGs for Icons -->
-   <svg style="display:none;">
-    <symbol id="icon-github" viewbox="0 0 16 16">
-      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-    </symbol>
-   </svg>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark light" />
 
-  <!-- ─── Contact Dropdown ─── -->
-  <nav class="contact-nav">
-    <div class="contact-dropdown">
-      <button class="contact-btn" onclick="this.parentElement.classList.toggle('open')">
-        Contact Me ▾
-      </button>
-      <ul class="dropdown-menu">
+<title>Rhidaya Shrestha — CS student building small AI tools</title>
+<meta name="description" content="Portfolio of Rhidaya Shrestha, a Computer Science (Honors) student at the University at Albany building small, shipped AI tools — a Chrome extension, a Spotify playlist maker, and more." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Rhidaya Shrestha — CS student building small AI tools" />
+<meta property="og:description" content="Chrome extensions, AI-powered apps, and game mods — small things I've actually shipped." />
+<meta property="og:url" content="https://potat4190.github.io/ProjectsDisplay/" />
+<meta property="og:site_name" content="Rhidaya Shrestha" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Rhidaya Shrestha — CS student building small AI tools" />
+<meta name="twitter:description" content="Chrome extensions, AI-powered apps, and game mods — small things I've actually shipped." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!--
+  ============================================================
+  THINGS TO SWAP / UPDATE LATER
+  ============================================================
+  1.  Anti-AFK Minecraft Mod repo URL
+        currently placeholder: https://github.com/potat4190/anti-afk-mod
+        replace `data-repo` on the card with the real one.
+  2.  Discord Music Bot repo URL
+        currently placeholder: https://github.com/potat4190/discord-music-bot
+        replace `data-repo` on the card with the real one.
+  3.  AI Text Converter — Chrome Web Store install URL
+        currently the "Install extension" button falls back to the
+        repo's README (unpacked install). When it's listed on the
+        Chrome Web Store, set `data-install` to that URL.
+  4.  AI Spotify Playlist Maker — demo video / GIF URL
+        `data-demo` is empty; drop in a YouTube or Loom URL to
+        light up the "Watch demo" button.
+  5.  Open Graph preview image
+        add <meta property="og:image" content="..."> once you have
+        a 1200x630 preview PNG committed at /og-image.png.
+  6.  favicon
+        add <link rel="icon"> once you have icons/favicon.svg or .ico.
+  7.  Personal Tutor AI
+        currently marked "In progress" with no link. Add
+        `data-repo` and remove the `data-status="wip"` when live.
+  ============================================================
+-->
+
+<style>
+/* ---------- theme tokens ---------- */
+:root {
+  --bg:        #0b0d10;
+  --surface:   #14171c;
+  --surface-2: #1b1f26;
+  --border:    #262b33;
+  --text:      #e7ebf0;
+  --muted:     #8a94a4;
+  --accent:    #7cc4ff;
+  --accent-ink:#06131f;
+  --danger:    #ff8a8a;
+  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.25);
+  --radius:    14px;
+  --measure:   65ch;
+  --ease:      cubic-bezier(.2,.7,.2,1);
+}
+:root[data-theme="light"] {
+  --bg:        #fafbfc;
+  --surface:   #ffffff;
+  --surface-2: #f2f4f7;
+  --border:    #e3e7ec;
+  --text:      #12161c;
+  --muted:     #566173;
+  --accent:    #1f6feb;
+  --accent-ink:#ffffff;
+  --shadow:    0 1px 2px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.08);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+p { margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+img, svg { display: block; max-width: 100%; }
+
+/* ---------- focus ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- layout helpers ---------- */
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section {
+  padding: 96px 0;
+  scroll-margin-top: 80px;
+}
+@media (max-width: 640px) {
+  section { padding: 64px 0; }
+  .wrap { padding: 0 20px; }
+}
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s var(--ease), background .2s var(--ease);
+}
+.nav.scrolled { border-bottom-color: var(--border); }
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: 16px;
+}
+.brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.brand:hover { text-decoration: none; }
+.brand .dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .15s var(--ease), background .15s var(--ease);
+}
+.nav-links a:hover { color: var(--text); text-decoration: none; background: var(--surface-2); }
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background .15s var(--ease), border-color .15s var(--ease);
+}
+.theme-toggle:hover { background: var(--surface-2); border-color: var(--muted); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="light"] .theme-toggle .sun { display: block; }
+:root[data-theme="light"] .theme-toggle .moon { display: none; }
+@media (max-width: 520px) {
+  .nav-links a { padding: 8px 10px; font-size: 13px; }
+  .brand { font-size: 15px; }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding: 112px 0 72px;
+}
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  margin-bottom: 24px;
+}
+.hero .eyebrow .live {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.15);
+}
+.hero h1 {
+  font-size: clamp(2.25rem, 6vw, 3.75rem);
+  margin-bottom: 20px;
+  max-width: 18ch;
+}
+.hero .lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text);
+  max-width: var(--measure);
+  margin-bottom: 12px;
+}
+.hero .sub {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: var(--measure);
+  margin-bottom: 32px;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14.5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease);
+  font-family: inherit;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--muted); }
+.btn svg { width: 16px; height: 16px; }
+
+/* ---------- section headings ---------- */
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.section-head h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+.section-head .kicker {
+  color: var(--muted);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+/* ---------- filter bar ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.filter {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: color .15s var(--ease), background .15s var(--ease);
+}
+.filter:hover { color: var(--text); background: var(--surface-2); }
+.filter[aria-pressed="true"] {
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+.filter .count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  opacity: .7;
+  margin-left: 6px;
+}
+
+/* ---------- cards grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+.card {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.card.featured { grid-column: span 6; }
+.card.featured::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 240px at 100% -20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
+  pointer-events: none;
+}
+.card > * { position: relative; }
+
+@media (min-width: 900px) {
+  .card.featured { grid-column: span 6; }
+}
+@media (max-width: 780px) {
+  .grid { grid-template-columns: 1fr; gap: 16px; }
+  .card, .card.featured { grid-column: span 1; }
+  .card { padding: 20px; }
+}
+
+.card.hidden { display: none; }
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.chip.featured-chip {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.chip.wip {
+  color: #f5a524;
+  border-color: color-mix(in srgb, #f5a524 40%, var(--border));
+  background: color-mix(in srgb, #f5a524 10%, transparent);
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+.card.featured h3 { font-size: 1.55rem; }
+
+.card .what {
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 16px;
+  max-width: 60ch;
+}
+.card.featured .what { font-size: 16px; }
+.card .why {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 20px;
+  max-width: 60ch;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.link-quiet {
+  color: var(--muted);
+  font-size: 13.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+  transition: color .15s var(--ease);
+}
+.link-quiet:hover { color: var(--text); text-decoration: none; }
+.link-quiet svg { width: 15px; height: 15px; }
+
+/* ---------- about ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 780px) {
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+.about p {
+  font-size: 1.05rem;
+  color: var(--text);
+  max-width: var(--measure);
+  margin-bottom: 16px;
+}
+.creds {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.creds h3 {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+.creds ul {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.creds li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text);
+}
+.creds li span:first-child {
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+}
+
+/* ---------- contact ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: transform .2s var(--ease), border-color .2s var(--ease);
+}
+.contact-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  text-decoration: none;
+}
+.contact-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.contact-card .value {
+  font-size: 15px;
+  color: var(--text);
+  word-break: break-word;
+}
+
+/* ---------- footer ---------- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  color: var(--muted);
+  font-size: 13.5px;
+  text-align: center;
+}
+
+/* ---------- reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { scroll-behavior: auto !important; }
+  .card:hover { transform: none; }
+}
+</style>
+</head>
+
+<body>
+
+<a class="skip-link" href="#work" style="position:absolute;left:-9999px;top:auto;">Skip to projects</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Rhidaya Shrestha — home">
+      <span class="dot" aria-hidden="true"></span>Rhidaya Shrestha
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
         <li>
-          <a href="https://www.instagram.com/potat4190" target="_blank" rel="noopener">
-            <span class="icon instagram" aria-hidden="true">
-              <svg viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" width="512" height="512">
-                <g>
-                	<path d="M12,2.162c3.204,0,3.584,0.012,4.849,0.07c1.308,0.06,2.655,0.358,3.608,1.311c0.962,0.962,1.251,2.296,1.311,3.608   c0.058,1.265,0.07,1.645,0.07,4.849c0,3.204-0.012,3.584-0.07,4.849c-0.059,1.301-0.364,2.661-1.311,3.608   c-0.962,0.962-2.295,1.251-3.608,1.311c-1.265,0.058-1.645,0.07-4.849,0.07s-3.584-0.012-4.849-0.07   c-1.291-0.059-2.669-0.371-3.608-1.311c-0.957-0.957-1.251-2.304-1.311-3.608c-0.058-1.265-0.07-1.645-0.07-4.849   c0-3.204,0.012-3.584,0.07-4.849c0.059-1.296,0.367-2.664,1.311-3.608c0.96-0.96,2.299-1.251,3.608-1.311   C8.416,2.174,8.796,2.162,12,2.162 M12,0C8.741,0,8.332,0.014,7.052,0.072C5.197,0.157,3.355,0.673,2.014,2.014   C0.668,3.36,0.157,5.198,0.072,7.052C0.014,8.332,0,8.741,0,12c0,3.259,0.014,3.668,0.072,4.948c0.085,1.853,0.603,3.7,1.942,5.038   c1.345,1.345,3.186,1.857,5.038,1.942C8.332,23.986,8.741,24,12,24c3.259,0,3.668-0.014,4.948-0.072   c1.854-0.085,3.698-0.602,5.038-1.942c1.347-1.347,1.857-3.184,1.942-5.038C23.986,15.668,24,15.259,24,12   c0-3.259-0.014-3.668-0.072-4.948c-0.085-1.855-0.602-3.698-1.942-5.038c-1.343-1.343-3.189-1.858-5.038-1.942   C15.668,0.014,15.259,0,12,0z"/>
-                	<path d="M12,5.838c-3.403,0-6.162,2.759-6.162,6.162c0,3.403,2.759,6.162,6.162,6.162s6.162-2.759,6.162-6.162   C18.162,8.597,15.403,5.838,12,5.838z M12,16c-2.209,0-4-1.791-4-4s1.791-4,4-4s4,1.791,4,4S14.209,16,12,16z"/>
-                	<circle cx="18.406" cy="5.594" r="1.44"/>
-                </g>
-              </svg>
-            </span>
-            Instagram
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/rhidaya-shrestha-a52850322/" target="_blank" rel="noopener">
-            <span class="icon linkedin" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" width="512" height="512">
-                <g>
-                	<path id="Path_2525" d="M23.002,21.584h0.227l-0.435-0.658l0,0c0.266,0,0.407-0.169,0.409-0.376c0-0.008,0-0.017-0.001-0.025   c0-0.282-0.17-0.417-0.519-0.417h-0.564v1.476h0.212v-0.643h0.261L23.002,21.584z M22.577,20.774h-0.246v-0.499h0.312   c0.161,0,0.345,0.026,0.345,0.237c0,0.242-0.186,0.262-0.412,0.262"/>
-                	<path id="Path_2520" d="M17.291,19.073h-3.007v-4.709c0-1.123-0.02-2.568-1.564-2.568c-1.566,0-1.806,1.223-1.806,2.487v4.79H7.908   V9.389h2.887v1.323h0.04c0.589-1.006,1.683-1.607,2.848-1.564c3.048,0,3.609,2.005,3.609,4.612L17.291,19.073z M4.515,8.065   c-0.964,0-1.745-0.781-1.745-1.745c0-0.964,0.781-1.745,1.745-1.745c0.964,0,1.745,0.781,1.745,1.745   C6.26,7.284,5.479,8.065,4.515,8.065L4.515,8.065 M6.018,19.073h-3.01V9.389h3.01V19.073z M18.79,1.783H1.497   C0.68,1.774,0.01,2.429,0,3.246V20.61c0.01,0.818,0.68,1.473,1.497,1.464H18.79c0.819,0.01,1.492-0.645,1.503-1.464V3.245   c-0.012-0.819-0.685-1.474-1.503-1.463"/>
-                	<path id="Path_2526" d="M22.603,19.451c-0.764,0.007-1.378,0.633-1.37,1.397c0.007,0.764,0.633,1.378,1.397,1.37   c0.764-0.007,1.378-0.633,1.37-1.397c-0.007-0.754-0.617-1.363-1.37-1.37H22.603 M22.635,22.059   c-0.67,0.011-1.254-0.522-1.265-1.192c-0.011-0.67,0.523-1.222,1.193-1.233c0.67-0.011,1.222,0.523,1.233,1.193   c0,0.007,0,0.013,0,0.02C23.81,21.502,23.29,22.045,22.635,22.059h-0.031"/>
-                </g>
-              </svg>
-            </span>
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a href="mailto:rshrestha2@albany.edu">
-            <span class="icon mail" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512"><path d="M19,1H5A5.006,5.006,0,0,0,0,6V18a5.006,5.006,0,0,0,5,5H19a5.006,5.006,0,0,0,5-5V6A5.006,5.006,0,0,0,19,1ZM5,3H19a3,3,0,0,1,2.78,1.887l-7.658,7.659a3.007,3.007,0,0,1-4.244,0L2.22,4.887A3,3,0,0,1,5,3ZM19,21H5a3,3,0,0,1-3-3V7.5L8.464,13.96a5.007,5.007,0,0,0,7.072,0L22,7.5V18A3,3,0,0,1,19,21Z"/>
-              </svg>
-            </span>
-            rshrestha2@albany.edu
-          </a>
-        </li>
-        <li>
-          <a href="https://wa.me/15182536421" target="_blank" rel="noopener">
-            <span class="icon whatsapp" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve" width="512" height="512">
-                <g id="WA_Logo">
-                	<g>
-                		<path style="fill-rule:evenodd;clip-rule:evenodd;" d="M20.463,3.488C18.217,1.24,15.231,0.001,12.05,0    C5.495,0,0.16,5.334,0.157,11.892c-0.001,2.096,0.547,4.142,1.588,5.946L0.057,24l6.304-1.654    c1.737,0.948,3.693,1.447,5.683,1.448h0.005c6.554,0,11.89-5.335,11.893-11.893C23.944,8.724,22.708,5.735,20.463,3.488z     M12.05,21.785h-0.004c-1.774,0-3.513-0.477-5.031-1.378l-0.361-0.214l-3.741,0.981l0.999-3.648l-0.235-0.374    c-0.99-1.574-1.512-3.393-1.511-5.26c0.002-5.45,4.437-9.884,9.889-9.884c2.64,0,5.122,1.03,6.988,2.898    c1.866,1.869,2.893,4.352,2.892,6.993C21.932,17.351,17.498,21.785,12.05,21.785z M17.472,14.382    c-0.297-0.149-1.758-0.868-2.031-0.967c-0.272-0.099-0.47-0.149-0.669,0.148s-0.767,0.967-0.941,1.166    c-0.173,0.198-0.347,0.223-0.644,0.074c-0.297-0.149-1.255-0.462-2.39-1.475c-0.883-0.788-1.48-1.761-1.653-2.059    s-0.018-0.458,0.13-0.606c0.134-0.133,0.297-0.347,0.446-0.521C9.87,9.97,9.919,9.846,10.019,9.647    c0.099-0.198,0.05-0.372-0.025-0.521C9.919,8.978,9.325,7.515,9.078,6.92c-0.241-0.58-0.486-0.501-0.669-0.51    C8.236,6.401,8.038,6.4,7.839,6.4c-0.198,0-0.52,0.074-0.792,0.372c-0.272,0.298-1.04,1.017-1.04,2.479    c0,1.463,1.065,2.876,1.213,3.074c0.148,0.198,2.095,3.2,5.076,4.487c0.709,0.306,1.263,0.489,1.694,0.626    c0.712,0.226,1.36,0.194,1.872,0.118c0.571-0.085,1.758-0.719,2.006-1.413c0.248-0.694,0.248-1.29,0.173-1.413    C17.967,14.605,17.769,14.531,17.472,14.382z"/>
-                	</g>
-                </g>
-              </svg>
-            </span>
-            WhatsApp
-          </a>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+            <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </button>
         </li>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </div>
+</header>
 
-  <!-- ─── Hero / Intro ─── -->
-  <header class="hero">
-    <h1>Hi, I'm Rhidaya 👋</h1>
-    <p class="tagline">CS student at UAlbany &amp; Lifelong Learner</p>
-    <p class="intro">
-      Welcome to my project showcase! I'm a passionate CS student who loves building
-      things that solve real problems. Below you'll find a collection of projects
-      I've worked on across different languages and frameworks. Feel free to explore
-      the code on GitHub!
+<main id="top">
+
+  <!-- ─── HERO ─── -->
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <span class="eyebrow"><span class="live" aria-hidden="true"></span>Open to internships · Summer 2026</span>
+    <h1 id="hero-title">CS student building small AI tools and shipping them.</h1>
+    <p class="lead">
+      I'm Rhidaya — a Computer Science (Honors) student at the University at Albany, SUNY.
+      I build browser extensions, web apps, and game mods that people can actually install and use.
     </p>
-  </header>
+    <p class="sub">
+      Born in Nepal, based in Albany, NY. I care about tools that help people who've moved
+      across the world feel a little more at home in a new one.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">See what I've built →</a>
+      <a class="btn btn-ghost" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </section>
 
-  <!-- ═══════════════════════════════════════════════
-       PYTHON PROJECTS
-  ═══════════════════════════════════════════════ -->
-  <section class="projects-section">
-    <h2 class="section-title"><span class="dot dot-python"></span> Python Projects</h2>
-    <div class="cards">
-
-      <article class="card">
-        <h3>AI Playlist Maker</h3>
-        <p>An AI powered app that creates playlists with real songs on Spotify according to the desired theme of the user using Gemini.</p>
-        <a class="repo-link" href="https://github.com/potat4190/AI_SpotifyPlaylistMaker" target="_blank" rel="noopener">
-          <svg>
-            <use href="#icon-github"></use>
-          </svg>
-          View on GitHub
-        </a>
-      </article>
-      
-      <article class="card">
-        <h3>Snake Game</h3>
-        <p>A simple yet fun classic Snake Game built using Python and Tkinter for the graphical interface. 
-          Control the snake, eat the food, and avoid collisions — how long can you grow?</p>
-          <a class="repo-link" href="https://github.com/potat4190/Snake-Game" target="_blank" rel="noopener">
-            <svg>
-              <use href="#icon-github"></use>
-            </svg>
-            View on GitHub
-          </a>
-        </article>
-        
-        <article class="card">
-          <h3>Discord Music Bot</h3>
-          <p>A music bot that joins a discord voice channel and plays audio from a YouTube video.</p>
-          <a class="repo-link" href="https://github.com/username/web-scraper-suite" target="_blank" rel="noopener">
-            <svg>
-              <use href="#icon-github"></use>
-            </svg>
-            View on GitHub
-          </a>
-        </article>
+  <!-- ─── WORK ─── -->
+  <section id="work" class="wrap" aria-labelledby="work-title">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">01 / Work</div>
+        <h2 id="work-title">Projects I've shipped</h2>
       </div>
-    </section>
-    
-    <!-- ═══════════════════════════════════════════════
-    JAVA PROJECTS
-    ═══════════════════════════════════════════════ -->
-    <section class="projects-section">
-      <h2 class="section-title"><span class="dot dot-java"></span> Java Projects</h2>
-      <div class="cards">
-        
-        <article class="card">
-          <h3>Coder or Gamer Quiz</h3>
-          <p>Asks the user a set of questions and calculates their coder or gamer probability based on the answers. Uses OOP and file handling.</p>
-          <a class="repo-link" href="https://github.com/potat4190/GamerOrCoder" target="_blank" rel="noopener">
-            <svg>
-              <use href="#icon-github"></use>
-            </svg>
-            View on GitHub
+    </div>
+
+    <div class="filters reveal" role="toolbar" aria-label="Filter projects by category or language">
+      <button class="filter" data-filter="all" aria-pressed="true" aria-label="Show all projects">All</button>
+      <button class="filter" data-filter="ai" aria-pressed="false" aria-label="Show AI tools">AI Tools</button>
+      <button class="filter" data-filter="web" aria-pressed="false" aria-label="Show web projects">Web</button>
+      <button class="filter" data-filter="games" aria-pressed="false" aria-label="Show games and mods">Games &amp; Mods</button>
+      <button class="filter" data-filter="python" aria-pressed="false" aria-label="Show Python projects">Python</button>
+      <button class="filter" data-filter="javascript" aria-pressed="false" aria-label="Show JavaScript projects">JavaScript</button>
+      <button class="filter" data-filter="java" aria-pressed="false" aria-label="Show Java projects">Java</button>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <!-- 1. AI Text Converter — FLAGSHIP -->
+      <article class="card featured reveal"
+               data-tags="ai web javascript"
+               data-repo="https://github.com/potat4190/textConvertExtension"
+               data-install="https://github.com/potat4190/textConvertExtension#install">
+        <div class="card-head">
+          <span class="chip featured-chip">★ Flagship · AI Tools</span>
+        </div>
+        <h3>AI Text Converter — Chrome Extension</h3>
+        <p class="what">
+          Select any text on any webpage — inputs, textareas, contenteditable — and rewrite it
+          in a different voice, in place. Two styles shipped so far: Shakespearean and "brainrot."
+        </p>
+        <p class="why">
+          Full loop end-to-end: a JavaScript Chrome extension talking to a Python (FastAPI) backend
+          that calls Google Gemini. A stranger can install it and use it in under a minute.
+        </p>
+        <div class="tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Chrome Extensions API</span>
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Google Gemini</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://github.com/potat4190/textConvertExtension#install" target="_blank" rel="noopener noreferrer">
+            Install extension →
           </a>
+          <a class="link-quiet" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener noreferrer" aria-label="View AI Text Converter source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
       </article>
 
-      <article class="card">
+      <!-- 2. AI Spotify Playlist Maker — FLAGSHIP -->
+      <article class="card featured reveal"
+               data-tags="ai python"
+               data-repo="https://github.com/potat4190/AI_SpotifyPlaylistMaker">
+        <div class="card-head">
+          <span class="chip featured-chip">★ Flagship · AI Tools</span>
+        </div>
+        <h3>AI Spotify Playlist Maker</h3>
+        <p class="what">
+          Type a vibe in plain language — "rainy afternoon lo-fi with a bit of jazz" — and get a real
+          Spotify playlist with real tracks added to your account.
+        </p>
+        <p class="why">
+          Turns natural language into structured artist and genre queries with Gemini, then writes
+          straight to a live third-party account via the Spotify Web API. Tkinter UI with
+          multithreading so the app doesn't freeze mid-request.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Google Gemini</span>
+          <span class="tag">Spotify Web API</span>
+          <span class="tag">Spotipy</span>
+          <span class="tag">Tkinter</span>
+          <span class="tag">Threading</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://github.com/potat4190/AI_SpotifyPlaylistMaker#readme" target="_blank" rel="noopener noreferrer">
+            Get it running →
+          </a>
+          <a class="link-quiet" href="https://github.com/potat4190/AI_SpotifyPlaylistMaker" target="_blank" rel="noopener noreferrer" aria-label="View AI Spotify Playlist Maker source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
+      </article>
+
+      <!-- 3. Anti-AFK Minecraft Mod -->
+      <article class="card reveal"
+               data-tags="games java"
+               data-repo="https://github.com/potat4190/anti-afk-mod">
+        <div class="card-head">
+          <span class="chip">Games &amp; Mods</span>
+        </div>
         <h3>Anti-AFK Minecraft Mod</h3>
-        <p>A client-side minecraft fabric mod that automatically presses the WASD keys on the keyboard in game so that you don't get kicked for being AFK.</p>
-        <a class="repo-link" href="https://github.com/potat4190/inventory-management" target="_blank" rel="noopener">
-            <svg>
-              <use href="#icon-github"></use>
-            </svg>
-            View on GitHub
+        <p class="what">
+          A client-side Fabric mod that simulates movement input so players don't get
+          kicked from servers for being AFK. Real players install it and run it.
+        </p>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">Fabric</span>
+          <span class="tag">Minecraft</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://github.com/potat4190/anti-afk-mod" target="_blank" rel="noopener noreferrer">
+            Download &amp; install →
           </a>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       WEB DEVELOPMENT PROJECTS
-  ═══════════════════════════════════════════════ -->
-  <section class="projects-section">
-    <h2 class="section-title"><span class="dot dot-web"></span> Web Development Projects</h2>
-    <div class="cards">
-
-      <article class="card">
-        <h3>Projects Display Website</h3>
-        <p>A responsive website to display my personal projects built with HTML, CSS &amp; vanilla JavaScript. This is the website you are in right now!</p>
-        <a class="repo-link" href="https://github.com/potat4190/ProjectsDisplay" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          View on GitHub
-        </a>
+          <a class="link-quiet" href="https://github.com/potat4190/anti-afk-mod" target="_blank" rel="noopener noreferrer" aria-label="View Anti-AFK Mod source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
       </article>
 
-      <article class="card">
-        <h3>Text Converter Extension</h3>
-        <p>A browser extension that can convert the selected text that the user types in into various styles. Currently, Shakesparean and Brainrot are the styles available.</p>
-        <a class="repo-link" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          View on GitHub
-        </a>
+      <!-- 4. Discord Music Bot -->
+      <article class="card reveal"
+               data-tags="python"
+               data-repo="https://github.com/potat4190/discord-music-bot">
+        <div class="card-head">
+          <span class="chip">Bot</span>
+        </div>
+        <h3>Discord Music Bot</h3>
+        <p class="what">
+          Joins a Discord voice channel and streams audio from a YouTube link on command.
+          Small, focused, and does exactly one thing well.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">discord.py</span>
+          <span class="tag">YouTube</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="https://github.com/potat4190/discord-music-bot" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
       </article>
-    </div>
-  </section>
 
-  <section class="projects-section">
-    <h2 class="section-title"><span class="dot dot-ai"></span> AI/ML Projects</h2>
-    <div class="cards">
+      <!-- 5. This portfolio -->
+      <article class="card reveal"
+               data-tags="web javascript"
+               data-repo="https://github.com/potat4190/ProjectsDisplay">
+        <div class="card-head">
+          <span class="chip">Web</span>
+        </div>
+        <h3>This Portfolio</h3>
+        <p class="what">
+          The site you're reading. One handwritten HTML file, no framework, no build step —
+          deployed straight to GitHub Pages.
+        </p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="https://potat4190.github.io/ProjectsDisplay/" target="_blank" rel="noopener noreferrer">
+            Open live site →
+          </a>
+          <a class="link-quiet" href="https://github.com/potat4190/ProjectsDisplay" target="_blank" rel="noopener noreferrer" aria-label="View portfolio source on GitHub">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
+      </article>
 
-      <article class="card">
+      <!-- 6. Coder or Gamer Quiz -->
+      <article class="card reveal"
+               data-tags="games java"
+               data-repo="https://github.com/potat4190/GamerOrCoder">
+        <div class="card-head">
+          <span class="chip">Games &amp; Mods</span>
+        </div>
+        <h3>Coder or Gamer Quiz</h3>
+        <p class="what">
+          A short quiz that scores your answers and tells you whether you're more coder or more
+          gamer. Written to practice OOP and file I/O in Java.
+        </p>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">OOP</span>
+          <span class="tag">File I/O</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="https://github.com/potat4190/GamerOrCoder" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
+      </article>
+
+      <!-- 7. Snake Game -->
+      <article class="card reveal"
+               data-tags="games python"
+               data-repo="https://github.com/potat4190/Snake-Game">
+        <div class="card-head">
+          <span class="chip">Games &amp; Mods</span>
+        </div>
+        <h3>Snake Game</h3>
+        <p class="what">
+          The classic Snake, rebuilt from scratch in Python with a Tkinter GUI.
+          Grow the snake, eat the food, don't crash — how long can you last?
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Tkinter</span>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-ghost" href="https://github.com/potat4190/Snake-Game" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            View source
+          </a>
+        </div>
+      </article>
+
+      <!-- 8. Personal Tutor AI — WIP -->
+      <article class="card reveal"
+               data-tags="ai python"
+               data-status="wip">
+        <div class="card-head">
+          <span class="chip wip">● In progress</span>
+        </div>
         <h3>Personal Tutor AI</h3>
-        <p>Work in progress</p>
-        <a class="repo-link" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          View on GitHub(Coming Soon)
-        </a>
+        <p class="what">
+          A private tutor that adapts to your gaps — currently drafting the retrieval and
+          quiz-generation loop. I'll open the repo when there's something worth showing.
+        </p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">RAG</span>
+          <span class="tag">LLM</span>
+        </div>
+        <div class="card-actions">
+          <span class="link-quiet" aria-live="polite">Coming soon — no dead links here.</span>
+        </div>
       </article>
+
     </div>
   </section>
 
-  <footer>
-    &copy; 2026 Rhidaya. Built with ☕ and curiosity.
-  </footer>
+  <!-- ─── ABOUT ─── -->
+  <section id="about" class="wrap about" aria-labelledby="about-title">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">02 / About</div>
+        <h2 id="about-title">A bit about me</h2>
+      </div>
+    </div>
 
+    <div class="about-grid">
+      <div class="reveal">
+        <p>
+          I'm a Computer Science (Honors) student at the University at Albany, SUNY,
+          with a minor in Machine Learning Informatics. I write code because I like
+          the moment when someone I don't know installs a thing I made and it just works.
+        </p>
+        <p>
+          I did Stanford's Code in Place and AWS's Intro to Generative AI, and made the
+          Dean's List in Fall 2025. What that adds up to: I can pick up a new stack fast,
+          I ship, and I know enough about AI to use it without pretending it's magic.
+        </p>
+        <p>
+          I grew up in a pastor's family in Nepal and taught a teen Sunday School group in
+          Lalitpur before I moved to the US. That's where I first learned that a good
+          tool is one that meets people where they are — and it's why I want to build
+          things for other international students who are figuring out a new country
+          the way I am now.
+        </p>
+      </div>
+
+      <aside class="creds reveal" aria-label="Quick facts">
+        <h3>Quick facts</h3>
+        <ul>
+          <li><span>School</span><span>UAlbany · CS Honors</span></li>
+          <li><span>Minor</span><span>Machine Learning Informatics</span></li>
+          <li><span>GPA</span><span>3.45 · Dean's List Fall 2025</span></li>
+          <li><span>Grad</span><span>2029 (expected)</span></li>
+          <li><span>Extra</span><span>Stanford Code in Place · AWS GenAI</span></li>
+          <li><span>Based in</span><span>Albany, NY · from Nepal</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact" class="wrap" aria-labelledby="contact-title">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">03 / Contact</div>
+        <h2 id="contact-title">Let's talk</h2>
+      </div>
+    </div>
+
+    <p class="reveal" style="color:var(--muted); max-width: var(--measure);">
+      The fastest ways to reach me. Email is best for anything long; WhatsApp for anything urgent.
+    </p>
+
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="mailto:rshrestha2@albany.edu">
+        <span class="label">Email</span>
+        <span class="value">rshrestha2@albany.edu</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/rhidaya-shrestha-a52850322/" target="_blank" rel="noopener noreferrer">
+        <span class="label">LinkedIn</span>
+        <span class="value">/in/rhidaya-shrestha</span>
+      </a>
+      <a class="contact-card" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
+        <span class="label">GitHub</span>
+        <span class="value">@potat4190</span>
+      </a>
+      <a class="contact-card" href="https://wa.me/15182536421" target="_blank" rel="noopener noreferrer">
+        <span class="label">WhatsApp</span>
+        <span class="value">+1 (518) 253-6421</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">&copy; 2026 Rhidaya Shrestha. Built with coffee and curiosity.</div>
+</footer>
+
+<script>
+(() => {
+  // ---------- theme toggle (no storage) ----------
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  let theme = 'dark';
+  root.setAttribute('data-theme', theme);
+  toggle.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', theme);
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  });
+
+  // ---------- nav shadow on scroll ----------
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---------- filter bar ----------
+  const filters = document.querySelectorAll('.filter');
+  const cards = Array.from(document.querySelectorAll('#grid .card'));
+
+  // populate counts
+  const counts = { all: cards.length };
+  cards.forEach(c => (c.dataset.tags || '').split(' ').forEach(t => {
+    if (!t) return;
+    counts[t] = (counts[t] || 0) + 1;
+  }));
+  filters.forEach(f => {
+    const k = f.dataset.filter;
+    const n = counts[k] || 0;
+    const badge = document.createElement('span');
+    badge.className = 'count';
+    badge.textContent = n;
+    f.appendChild(badge);
+  });
+
+  filters.forEach(f => {
+    f.addEventListener('click', () => {
+      filters.forEach(x => x.setAttribute('aria-pressed', 'false'));
+      f.setAttribute('aria-pressed', 'true');
+      const key = f.dataset.filter;
+      cards.forEach(card => {
+        const tags = (card.dataset.tags || '').split(' ');
+        const show = key === 'all' || tags.includes(key);
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  // ---------- reveal on scroll ----------
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>
