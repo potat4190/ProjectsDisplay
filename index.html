@@ -6,576 +6,732 @@
 <meta name="color-scheme" content="dark light" />
 
 <title>Rhidaya Shrestha — CS student building small AI tools</title>
-<meta name="description" content="Portfolio of Rhidaya Shrestha, a Computer Science (Honors) student at the University at Albany building small, shipped AI tools — a Chrome extension, a Spotify playlist maker, and more." />
+<meta name="description" content="Portfolio of Rhidaya Shrestha, a Computer Science (Honors) student at the University at Albany building small, shipped AI tools — a Chrome extension, a Spotify playlist maker, a Java battle simulator, and more." />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Rhidaya Shrestha — CS student building small AI tools" />
 <meta property="og:description" content="Chrome extensions, AI-powered apps, and game mods — small things I've actually shipped." />
 <meta property="og:url" content="https://potat4190.github.io/ProjectsDisplay/" />
 <meta property="og:site_name" content="Rhidaya Shrestha" />
+<meta property="og:image" content="https://potat4190.github.io/ProjectsDisplay/images/optimized/portrait-640.webp" />
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="854" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Rhidaya Shrestha — CS student building small AI tools" />
 <meta name="twitter:description" content="Chrome extensions, AI-powered apps, and game mods — small things I've actually shipped." />
+<meta name="theme-color" content="#010A03" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23010A03'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2300FF7F'/%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <!--
   ============================================================
+  Design system: see MASTER.md (Terminal Green).
+  Every color / size / easing below is a token from that file.
+
   THINGS TO SWAP / UPDATE LATER
   ============================================================
-  1.  Anti-AFK Minecraft Mod repo URL
-        currently placeholder: https://github.com/potat4190/anti-afk-mod
-        replace `data-repo` on the card with the real one.
-  2.  Discord Music Bot repo URL
-        currently placeholder: https://github.com/potat4190/discord-music-bot
-        replace `data-repo` on the card with the real one.
-  3.  AI Text Converter — Chrome Web Store install URL
-        currently the "Install extension" button falls back to the
-        repo's README (unpacked install). When it's listed on the
-        Chrome Web Store, set `data-install` to that URL.
-  4.  AI Spotify Playlist Maker — demo video / GIF URL
-        `data-demo` is empty; drop in a YouTube or Loom URL to
-        light up the "Watch demo" button.
-  5.  Open Graph preview image
-        add <meta property="og:image" content="..."> once you have
-        a 1200x630 preview PNG committed at /og-image.png.
-  6.  favicon
-        add <link rel="icon"> once you have icons/favicon.svg or .ico.
-  7.  Personal Tutor AI
-        currently marked "In progress" with no link. Add
-        `data-repo` and remove the `data-status="wip"` when live.
+  1.  AI Text Converter — Chrome Web Store install URL
+        "Install extension" currently points at the README's
+        "Run it locally" section (unpacked install). When the
+        extension is listed on the Chrome Web Store, swap that
+        href for the store URL.
+  2.  AI Spotify Playlist Maker — demo video / GIF
+        No demo link yet. Drop in a YouTube or Loom URL and add
+        a "Watch demo" .link-quiet next to "Get it running".
+  3.  Personal Tutor AI
+        Marked "In progress" with no link, by design. When the
+        repo is public, give it a real button like the others.
+  4.  Open Graph preview image
+        og:image currently reuses the portrait. Replace with a
+        purpose-built 1200x630 PNG when you have one.
+  5.  Battle-Simulator / Snake / GamerOrCoder screenshots
+        These cards use coded visuals or text-only layouts
+        because images/ has no screenshots for them. Drop a
+        WebP into images/optimized/ and add a <picture> block
+        matching the pattern used by the two flagship cards.
   ============================================================
 -->
 
 <style>
-/* ---------- theme tokens ---------- */
+/* ============================================================
+   1. TOKENS  (MASTER.md)
+   ============================================================ */
 :root {
-  --bg:        #0b0d10;
-  --surface:   #14171c;
-  --surface-2: #1b1f26;
-  --border:    #262b33;
-  --text:      #e7ebf0;
-  --muted:     #8a94a4;
-  --accent:    #7cc4ff;
-  --accent-ink:#06131f;
-  --danger:    #ff8a8a;
-  --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.25);
-  --radius:    14px;
-  --measure:   65ch;
-  --ease:      cubic-bezier(.2,.7,.2,1);
-}
-:root[data-theme="light"] {
-  --bg:        #fafbfc;
-  --surface:   #ffffff;
-  --surface-2: #f2f4f7;
-  --border:    #e3e7ec;
-  --text:      #12161c;
-  --muted:     #566173;
-  --accent:    #1f6feb;
-  --accent-ink:#ffffff;
-  --shadow:    0 1px 2px rgba(15,23,42,.06), 0 8px 24px rgba(15,23,42,.08);
+  /* color — dark, primary */
+  --bg:         #010A03;
+  --bg-elev:    #04120A;
+  --surface:    rgba(230,255,230,.030);
+  --surface-2:  rgba(230,255,230,.055);
+  --border:     rgba(230,255,230,.10);
+  --border-hi:  rgba(0,255,127,.38);
+  --text:       #E6FFE6;
+  --muted:      #A0BFA0;
+  --accent:     #00FF7F;
+  --accent-ink: #00140A;
+  --warn:       #F5A524;
+  --glow:       rgba(0,255,127,.22);
+
+  /* type */
+  --f-display: 'Space Grotesk', system-ui, sans-serif;
+  --f-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --fs-display: clamp(2.75rem, 7.4vw, 5.25rem);
+  --fs-h2:      clamp(2rem, 5.2vw, 3.25rem);
+  --fs-h3:      clamp(1.15rem, 1.5vw, 1.4rem);
+  --fs-lead:    clamp(1.05rem, 1.5vw, 1.2rem);
+  --fs-body:    1rem;
+  --fs-sm:      .875rem;
+  --fs-micro:   .6875rem;
+  --measure:    64ch;
+
+  /* space */
+  --s1:4px;  --s2:8px;  --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* radii + blur */
+  --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-pill:999px;
+  --blur-nav:14px; --blur-card:12px;
+
+  /* layout */
+  --maxw: 1180px;
+  --gap:  24px;
+
+  /* motion */
+  --e-out:   cubic-bezier(.165,.84,.44,1);
+  --e-quint: cubic-bezier(.23,1,.32,1);
+  --e-in:    cubic-bezier(.4,0,1,1);
+  --d-fast:  160ms;
+  --d-base:  260ms;
+  --d-slow:  420ms;
+  --d-xslow: 900ms;
+  --stagger: 60ms;
 }
 
-/* ---------- reset ---------- */
+:root[data-theme="light"] {
+  --bg:         #F3F7F4;
+  --bg-elev:    #FFFFFF;
+  --surface:    rgba(6,20,11,.028);
+  --surface-2:  rgba(6,20,11,.055);
+  --border:     rgba(6,20,11,.12);
+  --border-hi:  rgba(0,121,76,.45);
+  --text:       #06140B;
+  --muted:      #4A5C50;
+  --accent:     #00794C;   /* AA-safe on light — #00FF7F would be 1.4:1 */
+  --accent-ink: #FFFFFF;
+  --warn:       #8A5200;   /* AA-safe on light — #F5A524 would be 1.9:1 */
+  --glow:       rgba(0,121,76,.16);
+}
+
+/* animatable typed property — powers the hover sweep on cards */
+@property --sweep { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+
+/* ============================================================
+   2. RESET
+   ============================================================ */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: var(--f-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background var(--d-base) var(--e-out), color var(--d-base) var(--e-out);
 }
-h1, h2, h3, h4 {
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
+h1,h2,h3,h4 { font-family: var(--f-display); font-weight: 700; line-height: 1.2; margin: 0; }
 p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:hover { text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
 
-/* ---------- focus ---------- */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: var(--r-sm);
 }
 
-/* ---------- layout helpers ---------- */
-.wrap {
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px;
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--accent); color: var(--accent-ink);
+  padding: var(--s3) var(--s5); border-radius: 0 0 var(--r-md) 0;
+  font-weight: 600;
 }
-section {
-  padding: 96px 0;
-  scroll-margin-top: 80px;
+.skip-link:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+/* ============================================================
+   3. LAYOUT
+   ============================================================ */
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--s5); }
+section { padding: var(--s9) 0; scroll-margin-top: 88px; position: relative; }
 @media (max-width: 640px) {
-  section { padding: 64px 0; }
-  .wrap { padding: 0 20px; }
+  section { padding: var(--s8) 0; }
+  .wrap  { padding: 0 20px; }
 }
 
-/* ---------- nav ---------- */
+/* ambient accent field — the only decorative light source on the page */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60vw 48vw at 78% -8%,  var(--glow), transparent 62%),
+    radial-gradient(52vw 42vw at 8% 42%,  color-mix(in srgb, var(--accent) 9%, transparent), transparent 66%);
+  opacity: .85;
+  animation: drift 26s var(--e-out) infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-3%, 2%, 0) scale(1.08); }
+}
+main, .nav, footer { position: relative; z-index: 1; }
+
+/* scroll progress — compositor only */
+.progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+  background: var(--accent); transform-origin: 0 50%; transform: scaleX(0);
+  z-index: 60;
+}
+@supports (animation-timeline: scroll()) {
+  .progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ============================================================
+   4. NAV
+   ============================================================ */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(150%) blur(var(--blur-nav));
+  -webkit-backdrop-filter: saturate(150%) blur(var(--blur-nav));
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
   border-bottom: 1px solid transparent;
-  transition: border-color .2s var(--ease), background .2s var(--ease);
+  transition: border-color var(--d-base) var(--e-out), background var(--d-base) var(--e-out);
 }
 .nav.scrolled { border-bottom-color: var(--border); }
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  gap: 16px;
-}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: var(--s4); }
+
 .brand {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; gap: var(--s3);
+  min-height: 44px; padding-right: var(--s2);   /* stays tappable when the label hides */
+  font-family: var(--f-display); font-weight: 700; font-size: 15px;
+  letter-spacing: -.01em; color: var(--text);
 }
-.brand:hover { text-decoration: none; }
 .brand .dot {
-  display: inline-block;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  margin-right: 10px;
-  vertical-align: middle;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  transition: transform var(--d-base) var(--e-out);
 }
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+.brand:hover .dot { transform: scale(1.35); }
+
+.nav-links { display: flex; align-items: center; gap: var(--s1); }
 .nav-links a {
-  color: var(--muted);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color .15s var(--ease), background .15s var(--ease);
+  position: relative; display: inline-flex; align-items: center;
+  min-height: 44px;                              /* WCAG touch target */
+  color: var(--muted); padding: 10px 14px; border-radius: var(--r-sm);
+  font-size: var(--fs-sm); font-weight: 500;
+  transition: color var(--d-fast) var(--e-out);
 }
-.nav-links a:hover { color: var(--text); text-decoration: none; background: var(--surface-2); }
+.nav-links a::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 8px;
+  height: 1px; background: var(--accent);
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform var(--d-base) var(--e-out);
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after, .nav-links a[aria-current="true"]::after { transform: scaleX(1); }
+.nav-links a[aria-current="true"] { color: var(--text); }
+
 .theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  cursor: pointer;
-  margin-left: 8px;
-  transition: background .15s var(--ease), border-color .15s var(--ease);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; margin-left: var(--s2);
+  border-radius: var(--r-pill); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); cursor: pointer;
+  transition: background var(--d-fast) var(--e-out), border-color var(--d-fast) var(--e-out), transform var(--d-fast) var(--e-out);
 }
-.theme-toggle:hover { background: var(--surface-2); border-color: var(--muted); }
-.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle:hover { background: var(--surface-2); border-color: var(--border-hi); }
+.theme-toggle:active { transform: scale(.94); }
+.theme-toggle svg { width: 17px; height: 17px; }
 .theme-toggle .sun { display: none; }
-:root[data-theme="light"] .theme-toggle .sun { display: block; }
+:root[data-theme="light"] .theme-toggle .sun  { display: block; }
 :root[data-theme="light"] .theme-toggle .moon { display: none; }
-@media (max-width: 520px) {
-  .nav-links a { padding: 8px 10px; font-size: 13px; }
-  .brand { font-size: 15px; }
+
+@media (max-width: 560px) {
+  .nav-links a { padding: 10px 9px; font-size: 13px; }
+  .brand span:last-child { display: none; }
 }
 
-/* ---------- hero ---------- */
-.hero {
-  padding: 112px 0 72px;
+/* ============================================================
+   5. HERO
+   ============================================================ */
+.hero { padding: clamp(64px, 12vw, 132px) 0 var(--s8); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: 7px 14px; border-radius: var(--r-pill);
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--muted); font-family: var(--f-mono);
+  font-size: 12px; margin-bottom: var(--s5);
+  backdrop-filter: blur(var(--blur-card));
+  -webkit-backdrop-filter: blur(var(--blur-card));
 }
-.hero .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 13px;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  margin-bottom: 24px;
+.eyebrow .live {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent);
+  animation: pulse 2.4s var(--e-out) infinite;
 }
-.hero .eyebrow .live {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #4ade80; box-shadow: 0 0 0 4px rgba(74,222,128,.15);
-}
-.hero h1 {
-  font-size: clamp(2.25rem, 6vw, 3.75rem);
-  margin-bottom: 20px;
-  max-width: 18ch;
-}
-.hero .lead {
-  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-  color: var(--text);
-  max-width: var(--measure);
-  margin-bottom: 12px;
-}
-.hero .sub {
-  font-size: 1rem;
-  color: var(--muted);
-  max-width: var(--measure);
-  margin-bottom: 32px;
-}
-.hero-cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70%  { box-shadow: 0 0 0 9px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 
-/* ---------- buttons ---------- */
+h1 {
+  font-size: var(--fs-display);
+  line-height: .94; letter-spacing: -.035em;
+  max-width: 15ch; margin-bottom: var(--s5);
+}
+/* masked line reveal — each line rides up from behind its own clip */
+.line { display: block; overflow: hidden; padding-bottom: .06em; }
+.line > span {
+  display: block;
+  transform: translateY(110%);
+  animation: riseIn var(--d-xslow) var(--e-quint) forwards;
+  animation-delay: calc(var(--i, 0) * 110ms + 120ms);
+}
+@keyframes riseIn { to { transform: translateY(0); } }
+.line .accent { color: var(--accent); }
+
+.hero .lead { font-size: var(--fs-lead); max-width: var(--measure); margin-bottom: var(--s3); }
+.hero .sub  { color: var(--muted); max-width: var(--measure); margin-bottom: var(--s6); }
+
+.hero-cta { display: flex; flex-wrap: wrap; gap: var(--s3); margin-bottom: var(--s8); }
+
+/* stat strip */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--s5); padding-top: var(--s6); border-top: 1px solid var(--border);
+}
+.stats div { min-width: 0; }
+.stats dt {
+  font-family: var(--f-mono); font-size: var(--fs-micro);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: var(--s2);
+}
+.stats dd {
+  margin: 0; font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(1.35rem, 2.6vw, 2rem); letter-spacing: -.02em; line-height: 1.1;
+}
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, 1fr); gap: var(--s5) var(--s4); }
+}
+
+/* ============================================================
+   6. BUTTONS
+   ============================================================ */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 14.5px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform .15s var(--ease), background .15s var(--ease), border-color .15s var(--ease), color .15s var(--ease);
-  font-family: inherit;
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 46px; padding: 12px 22px;
+  border-radius: var(--r-pill); border: 1px solid transparent;
+  font-weight: 600; font-size: 14.5px; cursor: pointer;
+  transition: transform var(--d-base) var(--e-out),
+              background var(--d-fast) var(--e-out),
+              border-color var(--d-fast) var(--e-out),
+              box-shadow var(--d-base) var(--e-quint),
+              color var(--d-fast) var(--e-out);
 }
-.btn:hover { text-decoration: none; }
-.btn-primary {
-  background: var(--accent);
-  color: var(--accent-ink);
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--accent) 30%, transparent);
 }
-.btn-primary:hover { transform: translateY(-1px); filter: brightness(1.05); }
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border);
-}
-.btn-ghost:hover { background: var(--surface-2); border-color: var(--muted); }
-.btn svg { width: 16px; height: 16px; }
+.btn-primary:active { transform: translateY(0) scale(.98); }
+.btn-ghost { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn-ghost:hover { background: var(--surface-2); border-color: var(--border-hi); transform: translateY(-2px); }
+.btn-ghost:active { transform: translateY(0) scale(.98); }
+.btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
 
-/* ---------- section headings ---------- */
-.section-head {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 32px;
+.link-quiet {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 44px; padding: 8px 6px;
+  color: var(--muted); font-size: var(--fs-sm); font-weight: 500;
+  transition: color var(--d-fast) var(--e-out);
 }
-.section-head h2 {
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
+.link-quiet:hover { color: var(--text); }
+.link-quiet svg { width: 15px; height: 15px; flex: none; }
+.link-quiet .arrow { transition: transform var(--d-base) var(--e-out); }
+.link-quiet:hover .arrow { transform: translateX(3px); }
+
+/* ============================================================
+   7. SECTION HEADS
+   ============================================================ */
+.kicker {
+  display: flex; align-items: center; gap: var(--s3);
+  font-family: var(--f-mono); font-size: var(--fs-micro);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: var(--s4);
 }
-.section-head .kicker {
-  color: var(--muted);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 13px;
-  margin-bottom: 6px;
+.kicker::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+h2 { font-size: var(--fs-h2); line-height: 1; letter-spacing: -.028em; }
+.section-sub { color: var(--muted); max-width: 46ch; margin-top: var(--s4); }
+
+/* ============================================================
+   8. WORK — editorial two-column, sticky rail
+   ============================================================ */
+.work-layout { display: grid; gap: var(--s7); }
+/* grid items default to min-width:auto — without this the nowrap filter row
+   forces the whole track wider than the viewport and the page scrolls sideways */
+.work-layout > *, .work-rail, .grid { min-width: 0; }
+@media (min-width: 1024px) {
+  .work-layout { grid-template-columns: 300px minmax(0, 1fr); gap: var(--s8); align-items: start; }
+  .work-rail { position: sticky; top: 108px; }
 }
 
-/* ---------- filter bar ---------- */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
-  padding: 6px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
+.filters { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s6); }
+@media (min-width: 1024px) { .filters { flex-direction: column; align-items: stretch; } }
+@media (max-width: 1023px) {
+  .filters {
+    flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--s2);
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .filters::-webkit-scrollbar { display: none; }
 }
+
 .filter {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: color .15s var(--ease), background .15s var(--ease);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  min-height: 44px; padding: 10px 16px;
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: var(--r-pill); color: var(--muted);
+  font-size: var(--fs-sm); font-weight: 500; cursor: pointer; white-space: nowrap;
+  transition: color var(--d-fast) var(--e-out), background var(--d-fast) var(--e-out),
+              border-color var(--d-fast) var(--e-out), transform var(--d-fast) var(--e-out);
 }
-.filter:hover { color: var(--text); background: var(--surface-2); }
-.filter[aria-pressed="true"] {
-  color: var(--accent-ink);
-  background: var(--accent);
-}
-.filter .count {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  opacity: .7;
-  margin-left: 6px;
+.filter:hover { color: var(--text); background: var(--surface-2); border-color: var(--border-hi); }
+.filter:active { transform: scale(.97); }
+.filter[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.filter .count { font-family: var(--f-mono); font-size: 11px; opacity: .65; }
+
+.result-note {
+  margin-top: var(--s4); font-family: var(--f-mono);
+  font-size: var(--fs-micro); letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
 }
 
-/* ---------- cards grid ---------- */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-}
+/* grid */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--gap); }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
 .card {
-  grid-column: span 3;
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: transform .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
-  position: relative;
-  overflow: hidden;
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(var(--blur-card));
+  -webkit-backdrop-filter: blur(var(--blur-card));
+  transition: transform var(--d-base) var(--e-out),
+              border-color var(--d-base) var(--e-out),
+              background var(--d-base) var(--e-out);
 }
-.card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
-.card.featured { grid-column: span 6; }
-.card.featured::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(600px 240px at 100% -20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 60%);
-  pointer-events: none;
+.card.featured { grid-column: 1 / -1; }
+@media (max-width: 700px) { .card.featured { grid-column: 1; } }
+
+/* cursor spotlight — --mx/--my written by rAF, never triggers layout */
+.card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%),
+              color-mix(in srgb, var(--accent) 13%, transparent), transparent 62%);
+  opacity: 0; transition: opacity var(--d-slow) var(--e-out);
 }
+.card:hover { transform: translateY(-4px); border-color: var(--border-hi); background: var(--surface-2); }
+.card:hover::before { opacity: 1; }
+.card:focus-within { border-color: var(--border-hi); }
 .card > * { position: relative; }
 
-@media (min-width: 900px) {
-  .card.featured { grid-column: span 6; }
-}
-@media (max-width: 780px) {
-  .grid { grid-template-columns: 1fr; gap: 16px; }
-  .card, .card.featured { grid-column: span 1; }
-  .card { padding: 20px; }
-}
+.card-body { display: flex; flex-direction: column; flex: 1; padding: var(--s5); }
+@media (min-width: 701px) { .card.featured .card-body { padding: var(--s6); } }
 
-.card.hidden { display: none; }
+.card-head { display: flex; justify-content: space-between; align-items: start; gap: var(--s3); margin-bottom: var(--s3); }
 
-.card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 12px;
-  margin-bottom: 8px;
-}
 .chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11.5px;
-  font-weight: 500;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  background: var(--surface-2);
+  display: inline-flex; align-items: center; gap: var(--s2);
+  padding: 5px 12px; border-radius: var(--r-pill);
+  font-family: var(--f-mono); font-size: 11px; font-weight: 500;
+  color: var(--muted); border: 1px solid var(--border); background: var(--surface-2);
   white-space: nowrap;
 }
 .chip.featured-chip {
   color: var(--accent);
-  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-color: var(--border-hi);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 .chip.wip {
-  color: #f5a524;
-  border-color: color-mix(in srgb, #f5a524 40%, var(--border));
-  background: color-mix(in srgb, #f5a524 10%, transparent);
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 40%, var(--border));
+  background: color-mix(in srgb, var(--warn) 10%, transparent);
 }
 
-.card h3 {
-  font-size: 1.3rem;
-  margin-bottom: 6px;
-}
-.card.featured h3 { font-size: 1.55rem; }
+.card h3 { font-size: var(--fs-h3); letter-spacing: -.012em; margin-bottom: var(--s3); }
+.card.featured h3 { font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
+.card .what { font-size: 15px; margin-bottom: var(--s3); max-width: 58ch; }
+.card .why  { color: var(--muted); font-size: 14px; margin-bottom: var(--s4); max-width: 58ch; }
 
-.card .what {
-  color: var(--text);
-  font-size: 15px;
-  margin-bottom: 16px;
-  max-width: 60ch;
-}
-.card.featured .what { font-size: 16px; }
-.card .why {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 20px;
-  max-width: 60ch;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 20px;
-}
+.tags { display: flex; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s5); }
 .tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  color: var(--muted);
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: var(--surface-2);
+  font-family: var(--f-mono); font-size: 11px; color: var(--muted);
+  padding: 4px 10px; border-radius: var(--r-sm);
+  background: var(--surface-2); border: 1px solid var(--border);
+  transition: color var(--d-fast) var(--e-out), border-color var(--d-fast) var(--e-out);
+}
+.card:hover .tag { border-color: color-mix(in srgb, var(--accent) 22%, var(--border)); }
+
+.card-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; }
+
+/* media block */
+.card-media {
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elev);
+}
+.card-media img { width: 100%; height: auto; }
+/* parallax drift inside the frame */
+@supports (animation-timeline: view()) {
+  .card-media img {
+    animation: mediaDrift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 100%;
+  }
+}
+@keyframes mediaDrift {
+  from { transform: scale(1.08) translateY(-2.2%); }
+  to   { transform: scale(1.08) translateY(2.2%); }
+}
+
+/* ---- coded d20 motif (Battle-Simulator) ---- */
+.d20-stage {
+  display: grid; place-items: center;
+  padding: var(--s7) var(--s5);
+  background:
+    radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 65%),
+    var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+/* faint dice-grid backdrop */
+.d20-stage::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(70% 60% at 50% 50%, #000, transparent 78%);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 50%, #000, transparent 78%);
+  opacity: .5; pointer-events: none;
+}
+.d20 { width: clamp(120px, 22vw, 168px); height: auto; position: relative; z-index: 1; overflow: visible; }
+.d20 .wire { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; opacity: .55; }
+.d20 .face { fill: color-mix(in srgb, var(--accent) 14%, transparent); stroke: var(--accent); stroke-width: 1.75; }
+.d20 .roll {
+  font-family: var(--f-mono); font-size: 19px; font-weight: 500;
+  fill: var(--accent); text-anchor: middle; dominant-baseline: central;
+}
+.d20-spin { transform-origin: 60px 60px; animation: d20spin 18s linear infinite; }
+@keyframes d20spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+/* counter-rotate the number so it stays upright */
+.d20-steady { transform-origin: 60px 64px; animation: d20spin 18s linear infinite reverse; }
+.card:hover .d20-spin, .card:hover .d20-steady { animation-duration: 5s; }
+
+/* ============================================================
+   9. ABOUT
+   ============================================================ */
+.about-grid { display: grid; gap: var(--s7); align-items: start; }
+@media (min-width: 900px) {
+  .about-grid { grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: var(--s8); }
+}
+.about p { max-width: var(--measure); margin-bottom: var(--s4); }
+.about p:last-of-type { margin-bottom: 0; }
+
+.portrait-stack { position: relative; }
+.portrait {
+  border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg-elev);
+}
+.portrait img { width: 100%; height: auto; }
+.portrait-alt {
+  position: absolute; right: -8px; bottom: -32px;
+  width: 38%; border-radius: var(--r-lg); overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow: 0 18px 44px rgba(0,0,0,.45);
+  background: var(--bg-elev);
 }
+.portrait-alt img { width: 100%; height: auto; }
+@media (max-width: 899px) { .portrait-alt { width: 32%; bottom: -20px; } }
 
-.card-actions {
-  margin-top: auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
+@supports (animation-timeline: view()) {
+  .portrait img  { animation: pFar linear both;  animation-timeline: view(); animation-range: entry 0% cover 100%; }
+  .portrait-alt  { animation: pNear linear both; animation-timeline: view(); animation-range: entry 0% cover 100%; }
 }
-.link-quiet {
-  color: var(--muted);
-  font-size: 13.5px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 4px;
-  transition: color .15s var(--ease);
-}
-.link-quiet:hover { color: var(--text); text-decoration: none; }
-.link-quiet svg { width: 15px; height: 15px; }
+@keyframes pFar  { from { transform: scale(1.06) translateY(-2%); } to { transform: scale(1.06) translateY(2%); } }
+@keyframes pNear { from { transform: translateY(16px); }           to { transform: translateY(-16px); } }
 
-/* ---------- about ---------- */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 48px;
-  align-items: start;
-}
-@media (max-width: 780px) {
-  .about-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-.about p {
-  font-size: 1.05rem;
-  color: var(--text);
-  max-width: var(--measure);
-  margin-bottom: 16px;
-}
 .creds {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); padding: var(--s6);
+  backdrop-filter: blur(var(--blur-card));
+  -webkit-backdrop-filter: blur(var(--blur-card));
+  margin-top: var(--s7);
 }
 .creds h3 {
-  font-size: .8rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--muted);
-  margin-bottom: 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 500;
+  font-family: var(--f-mono); font-size: var(--fs-micro); font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: var(--s5);
 }
-.creds ul {
-  list-style: none;
-  margin: 0; padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.creds ul { display: flex; flex-direction: column; gap: var(--s4); }
 .creds li {
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 12px;
-  font-size: 14px;
-  color: var(--text);
+  display: grid; grid-template-columns: 96px 1fr; gap: var(--s4);
+  font-size: var(--fs-sm); align-items: baseline;
 }
-.creds li span:first-child {
-  color: var(--muted);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
+.creds li > span:first-child {
+  color: var(--muted); font-family: var(--f-mono);
+  font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase;
 }
+@media (max-width: 420px) { .creds li { grid-template-columns: 1fr; gap: var(--s1); } }
 
-/* ---------- contact ---------- */
+/* ============================================================
+   10. CONTACT
+   ============================================================ */
 .contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 28px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: var(--gap); margin-top: var(--s7);
 }
 .contact-card {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text);
-  transition: transform .2s var(--ease), border-color .2s var(--ease);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: var(--s2);
+  min-height: 118px; padding: var(--s5);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-xl); color: var(--text);
+  backdrop-filter: blur(var(--blur-card));
+  -webkit-backdrop-filter: blur(var(--blur-card));
+  transition: transform var(--d-base) var(--e-out), border-color var(--d-base) var(--e-out),
+              background var(--d-base) var(--e-out);
 }
-.contact-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-  text-decoration: none;
+.contact-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(260px circle at var(--mx,50%) var(--my,0%),
+              color-mix(in srgb, var(--accent) 14%, transparent), transparent 60%);
+  opacity: 0; transition: opacity var(--d-slow) var(--e-out);
 }
+.contact-card:hover { transform: translateY(-4px); border-color: var(--border-hi); background: var(--surface-2); }
+.contact-card:hover::before { opacity: 1; }
+.contact-card > * { position: relative; }
 .contact-card .label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: .06em;
+  display: flex; align-items: center; gap: var(--s2);
+  font-family: var(--f-mono); font-size: var(--fs-micro);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
 }
-.contact-card .value {
-  font-size: 15px;
-  color: var(--text);
-  word-break: break-word;
+.contact-card .label svg { width: 14px; height: 14px; }
+.contact-card .value { font-size: 15px; word-break: break-word; }
+.contact-card .go {
+  margin-top: auto; color: var(--accent); font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity var(--d-base) var(--e-out), transform var(--d-base) var(--e-out);
 }
+.contact-card:hover .go, .contact-card:focus-visible .go { opacity: 1; transform: translateY(0); }
 
-/* ---------- footer ---------- */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 32px 0;
-  color: var(--muted);
-  font-size: 13.5px;
-  text-align: center;
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+footer { border-top: 1px solid var(--border); padding: var(--s7) 0; margin-top: var(--s8); }
+.foot-inner {
+  display: flex; flex-wrap: wrap; gap: var(--s4);
+  align-items: center; justify-content: space-between;
+  color: var(--muted); font-size: 13.5px;
 }
+.foot-links { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); margin: calc(var(--s3) * -1) 0; }
+.foot-links a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  color: var(--muted); transition: color var(--d-fast) var(--e-out);
+}
+.foot-links a:hover { color: var(--text); }
 
-/* ---------- reveal on scroll ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity .6s var(--ease), transform .6s var(--ease);
-}
+/* ============================================================
+   12. SCROLL REVEAL
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(18px); }
 .reveal.in {
-  opacity: 1;
-  transform: none;
+  opacity: 1; transform: none;
+  transition: opacity var(--d-slow) var(--e-out), transform var(--d-slow) var(--e-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger));
 }
+
+/* ============================================================
+   13. VIEW TRANSITIONS — filter morph
+   ============================================================ */
+::view-transition-old(root) { animation: vtOut 200ms var(--e-in) both; }
+::view-transition-new(root) { animation: vtIn  var(--d-slow) var(--e-out) both; }
+@keyframes vtOut { to   { opacity: 0; } }
+@keyframes vtIn  { from { opacity: 0; } }
+
+/* ============================================================
+   14. REDUCED MOTION — everything decorative stops
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
-  * { scroll-behavior: auto !important; }
-  .card:hover { transform: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .line > span { transform: none; }
+  .card:hover, .contact-card:hover, .btn:hover { transform: none; }
+  .card::before, .contact-card::before { display: none; }
+  .ambient { animation: none; }
+  .contact-card .go { opacity: 1; transform: none; }
 }
 </style>
+
+<!-- If JS is blocked, .reveal never gets .in — without this the whole page
+     below the hero would render at opacity 0. Content first, always. -->
+<noscript><style>
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .line > span { transform: none !important; animation: none !important; }
+  .contact-card .go { opacity: 1 !important; transform: none !important; }
+</style></noscript>
 </head>
 
 <body>
 
-<a class="skip-link" href="#work" style="position:absolute;left:-9999px;top:auto;">Skip to projects</a>
+<a class="skip-link" href="#work">Skip to projects</a>
+<div class="ambient" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand" aria-label="Rhidaya Shrestha — home">
-      <span class="dot" aria-hidden="true"></span>Rhidaya Shrestha
+    <a href="#top" class="brand" aria-label="Rhidaya Shrestha — back to top">
+      <span class="dot" aria-hidden="true"></span><span>Rhidaya Shrestha</span>
     </a>
     <nav aria-label="Primary">
       <ul class="nav-links">
@@ -583,7 +739,7 @@ footer {
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
         <li>
-          <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme" title="Toggle theme">
+          <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme" title="Toggle theme">
             <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
             <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
           </button>
@@ -595,10 +751,16 @@ footer {
 
 <main id="top">
 
-  <!-- ─── HERO ─── -->
+  <!-- ─────────────────────────── HERO ─────────────────────────── -->
   <section class="hero wrap" aria-labelledby="hero-title">
     <span class="eyebrow"><span class="live" aria-hidden="true"></span>Open to internships · Summer 2026</span>
-    <h1 id="hero-title">CS student building small AI tools and shipping them.</h1>
+
+    <h1 id="hero-title">
+      <span class="line"><span style="--i:0">CS student building</span></span>
+      <span class="line"><span style="--i:1">small <span class="accent">AI tools</span></span></span>
+      <span class="line"><span style="--i:2">and shipping them.</span></span>
+    </h1>
+
     <p class="lead">
       I'm Rhidaya — a Computer Science (Honors) student at the University at Albany, SUNY.
       I build browser extensions, web apps, and game mods that people can actually install and use.
@@ -607,273 +769,324 @@ footer {
       Born in Nepal, based in Albany, NY. I care about tools that help people who've moved
       across the world feel a little more at home in a new one.
     </p>
+
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#work">See what I've built →</a>
-      <a class="btn btn-ghost" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
+      <a class="btn btn-primary magnetic" href="#work">
+        See what I've built
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost magnetic" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub
       </a>
     </div>
+
+    <dl class="stats reveal">
+      <div><dt>Shipped</dt><dd>9 projects</dd></div>
+      <div><dt>Languages</dt><dd>Py · JS · Java</dd></div>
+      <div><dt>Standing</dt><dd>Dean's List</dd></div>
+      <div><dt>Based in</dt><dd>Albany, NY</dd></div>
+    </dl>
   </section>
 
-  <!-- ─── WORK ─── -->
+  <!-- ─────────────────────────── WORK ─────────────────────────── -->
   <section id="work" class="wrap" aria-labelledby="work-title">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker">01 / Work</div>
-        <h2 id="work-title">Projects I've shipped</h2>
+    <div class="work-layout">
+
+      <!-- sticky editorial rail -->
+      <div class="work-rail">
+        <div class="reveal">
+          <div class="kicker">01 / Work</div>
+          <h2 id="work-title">Projects<br />I've shipped</h2>
+          <p class="section-sub">
+            Nine things I built and actually finished. Every link below goes somewhere real.
+          </p>
+        </div>
+
+        <div class="filters reveal" role="toolbar" aria-label="Filter projects by category or language">
+          <button class="filter" data-filter="all"        aria-pressed="true">All<span class="count"></span></button>
+          <button class="filter" data-filter="ai"         aria-pressed="false">AI Tools<span class="count"></span></button>
+          <button class="filter" data-filter="web"        aria-pressed="false">Web<span class="count"></span></button>
+          <button class="filter" data-filter="games"      aria-pressed="false">Games &amp; Mods<span class="count"></span></button>
+          <button class="filter" data-filter="python"     aria-pressed="false">Python<span class="count"></span></button>
+          <button class="filter" data-filter="javascript" aria-pressed="false">JavaScript<span class="count"></span></button>
+          <button class="filter" data-filter="java"       aria-pressed="false">Java<span class="count"></span></button>
+        </div>
+
+        <p class="result-note" id="resultNote" aria-live="polite">Showing all 9 projects</p>
       </div>
-    </div>
 
-    <div class="filters reveal" role="toolbar" aria-label="Filter projects by category or language">
-      <button class="filter" data-filter="all" aria-pressed="true" aria-label="Show all projects">All</button>
-      <button class="filter" data-filter="ai" aria-pressed="false" aria-label="Show AI tools">AI Tools</button>
-      <button class="filter" data-filter="web" aria-pressed="false" aria-label="Show web projects">Web</button>
-      <button class="filter" data-filter="games" aria-pressed="false" aria-label="Show games and mods">Games &amp; Mods</button>
-      <button class="filter" data-filter="python" aria-pressed="false" aria-label="Show Python projects">Python</button>
-      <button class="filter" data-filter="javascript" aria-pressed="false" aria-label="Show JavaScript projects">JavaScript</button>
-      <button class="filter" data-filter="java" aria-pressed="false" aria-label="Show Java projects">Java</button>
-    </div>
+      <!-- cards -->
+      <div class="grid" id="grid">
 
-    <div class="grid" id="grid">
+        <!-- 1. AI Text Converter — FLAGSHIP -->
+        <article class="card featured reveal" data-tags="ai web javascript">
+          <div class="card-media">
+            <img src="images/optimized/extension-inline-640.webp"
+                 width="640" height="260" loading="lazy" decoding="async"
+                 alt="The extension's Shakespeare and Brainrot buttons floating above a selected sentence in a text box." />
+          </div>
+          <div class="card-body">
+            <div class="card-head"><span class="chip featured-chip">★ Flagship · AI Tools</span></div>
+            <h3>AI Text Converter — Chrome Extension</h3>
+            <p class="what">
+              Select any text on any webpage — inputs, textareas, contenteditable — and rewrite it
+              in a different voice, in place. Two styles shipped so far: Shakespearean and "brainrot."
+            </p>
+            <p class="why">
+              Full loop end-to-end: a JavaScript Chrome extension talking to a Python (FastAPI) backend
+              that calls Google Gemini. A stranger can install it and use it in under a minute.
+            </p>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">Chrome Extensions API</span>
+              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Google Gemini</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/potat4190/textConvertExtension#run-it-locally" target="_blank" rel="noopener noreferrer">
+                Install extension
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="link-quiet" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener noreferrer" aria-label="View AI Text Converter source on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 1. AI Text Converter — FLAGSHIP -->
-      <article class="card featured reveal"
-               data-tags="ai web javascript"
-               data-repo="https://github.com/potat4190/textConvertExtension"
-               data-install="https://github.com/potat4190/textConvertExtension#install">
-        <div class="card-head">
-          <span class="chip featured-chip">★ Flagship · AI Tools</span>
-        </div>
-        <h3>AI Text Converter — Chrome Extension</h3>
-        <p class="what">
-          Select any text on any webpage — inputs, textareas, contenteditable — and rewrite it
-          in a different voice, in place. Two styles shipped so far: Shakespearean and "brainrot."
-        </p>
-        <p class="why">
-          Full loop end-to-end: a JavaScript Chrome extension talking to a Python (FastAPI) backend
-          that calls Google Gemini. A stranger can install it and use it in under a minute.
-        </p>
-        <div class="tags">
-          <span class="tag">JavaScript</span>
-          <span class="tag">Chrome Extensions API</span>
-          <span class="tag">Python</span>
-          <span class="tag">FastAPI</span>
-          <span class="tag">Google Gemini</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="https://github.com/potat4190/textConvertExtension#install" target="_blank" rel="noopener noreferrer">
-            Install extension →
-          </a>
-          <a class="link-quiet" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener noreferrer" aria-label="View AI Text Converter source on GitHub">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 2. AI Spotify Playlist Maker — FLAGSHIP -->
+        <article class="card featured reveal" data-tags="ai python">
+          <div class="card-media">
+            <img src="images/optimized/playlist-1280.webp"
+                 srcset="images/optimized/playlist-1280.webp 1280w, images/optimized/playlist-1910.webp 1910w"
+                 sizes="(min-width: 1024px) 800px, 100vw"
+                 width="1280" height="374" loading="lazy" decoding="async"
+                 alt="The AI Playlist Creator desktop app: a vibe field reading 'energetic workout', a song count of 25, and an output log showing Gemini being asked for artists and genres." />
+          </div>
+          <div class="card-body">
+            <div class="card-head"><span class="chip featured-chip">★ Flagship · AI Tools</span></div>
+            <h3>AI Spotify Playlist Maker</h3>
+            <p class="what">
+              Type a vibe in plain language — "rainy afternoon lo-fi with a bit of jazz" — and get a real
+              Spotify playlist with real tracks added to your account.
+            </p>
+            <p class="why">
+              Turns natural language into structured artist and genre queries with Gemini, then writes
+              straight to a live third-party account via the Spotify Web API. Desktop UI with
+              multithreading so the app doesn't freeze mid-request.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Google Gemini</span>
+              <span class="tag">Spotify Web API</span><span class="tag">Spotipy</span>
+              <span class="tag">Tkinter</span><span class="tag">Threading</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/potat4190/AiSpotifyPlaylistMaker#readme" target="_blank" rel="noopener noreferrer">
+                Get it running
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="link-quiet" href="https://github.com/potat4190/AiSpotifyPlaylistMaker" target="_blank" rel="noopener noreferrer" aria-label="View AI Spotify Playlist Maker source on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 2. AI Spotify Playlist Maker — FLAGSHIP -->
-      <article class="card featured reveal"
-               data-tags="ai python"
-               data-repo="https://github.com/potat4190/AI_SpotifyPlaylistMaker">
-        <div class="card-head">
-          <span class="chip featured-chip">★ Flagship · AI Tools</span>
-        </div>
-        <h3>AI Spotify Playlist Maker</h3>
-        <p class="what">
-          Type a vibe in plain language — "rainy afternoon lo-fi with a bit of jazz" — and get a real
-          Spotify playlist with real tracks added to your account.
-        </p>
-        <p class="why">
-          Turns natural language into structured artist and genre queries with Gemini, then writes
-          straight to a live third-party account via the Spotify Web API. Tkinter UI with
-          multithreading so the app doesn't freeze mid-request.
-        </p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Google Gemini</span>
-          <span class="tag">Spotify Web API</span>
-          <span class="tag">Spotipy</span>
-          <span class="tag">Tkinter</span>
-          <span class="tag">Threading</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="https://github.com/potat4190/AI_SpotifyPlaylistMaker#readme" target="_blank" rel="noopener noreferrer">
-            Get it running →
-          </a>
-          <a class="link-quiet" href="https://github.com/potat4190/AI_SpotifyPlaylistMaker" target="_blank" rel="noopener noreferrer" aria-label="View AI Spotify Playlist Maker source on GitHub">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 3. Battle-Simulator — NEW -->
+        <article class="card reveal" data-tags="games java">
+          <div class="d20-stage" aria-hidden="true">
+            <svg class="d20" viewBox="0 0 120 128" role="img" aria-hidden="true">
+              <g class="d20-spin">
+                <!-- outer icosahedron silhouette -->
+                <path class="wire" d="M60 6 L107 33 L107 87 L60 114 L13 87 L13 33 Z" />
+                <!-- spokes to the central face -->
+                <path class="wire" d="M60 6 L60 34 M107 33 L60 34 M13 33 L60 34
+                                       M13 33 L35 80 M13 87 L35 80 M60 114 L35 80
+                                       M107 33 L85 80 M107 87 L85 80 M60 114 L85 80" />
+                <!-- central face -->
+                <path class="face" d="M60 34 L85 80 L35 80 Z" />
+              </g>
+              <g class="d20-steady">
+                <text class="roll" x="60" y="66" id="d20roll">20</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="card-head"><span class="chip">Games &amp; Mods</span></div>
+            <h3>Battle-Simulator</h3>
+            <p class="what">
+              A turn-based console battle game inspired by Dungeons &amp; Dragons. Load a roster of
+              combatants from a text file, roll initiative, then fight it out round by round until
+              the party or every monster is down.
+            </p>
+            <p class="why">
+              My ICSI 207 final project, and the one where object-oriented design finally clicked:
+              abstract <code>Combatant</code> and <code>Character</code> base classes, polymorphic
+              dispatch across Warrior / Mage / Rogue / Dragon, limited-use abilities, and a file
+              parser that rejects malformed rosters instead of crashing.
+            </p>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">OOP</span>
+              <span class="tag">Abstract Classes</span><span class="tag">Polymorphism</span>
+              <span class="tag">File I/O</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/potat4190/Battle-Simulator" target="_blank" rel="noopener noreferrer">
+                View source
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 3. Anti-AFK Minecraft Mod -->
-      <article class="card reveal"
-               data-tags="games java"
-               data-repo="https://github.com/potat4190/anti-afk-mod">
-        <div class="card-head">
-          <span class="chip">Games &amp; Mods</span>
-        </div>
-        <h3>Anti-AFK Minecraft Mod</h3>
-        <p class="what">
-          A client-side Fabric mod that simulates movement input so players don't get
-          kicked from servers for being AFK. Real players install it and run it.
-        </p>
-        <div class="tags">
-          <span class="tag">Java</span>
-          <span class="tag">Fabric</span>
-          <span class="tag">Minecraft</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="https://github.com/potat4190/anti-afk-mod" target="_blank" rel="noopener noreferrer">
-            Download &amp; install →
-          </a>
-          <a class="link-quiet" href="https://github.com/potat4190/anti-afk-mod" target="_blank" rel="noopener noreferrer" aria-label="View Anti-AFK Mod source on GitHub">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 4. Anti-AFK Minecraft Mod -->
+        <article class="card reveal" data-tags="games java">
+          <div class="card-body">
+            <div class="card-head"><span class="chip">Games &amp; Mods</span></div>
+            <h3>Anti-AFK Minecraft Mod</h3>
+            <p class="what">
+              A client-side Fabric mod for Minecraft 1.21.1 that simulates movement input so players
+              don't get kicked from servers for being AFK. Real players install it and run it.
+            </p>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">Fabric</span>
+              <span class="tag">Gradle</span><span class="tag">Minecraft 1.21.1</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://github.com/potat4190/AntiAFK" target="_blank" rel="noopener noreferrer">
+                Download &amp; install
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="link-quiet" href="https://github.com/potat4190/AntiAFK" target="_blank" rel="noopener noreferrer" aria-label="View Anti-AFK Mod source on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 4. Discord Music Bot -->
-      <article class="card reveal"
-               data-tags="python"
-               data-repo="https://github.com/potat4190/discord-music-bot">
-        <div class="card-head">
-          <span class="chip">Bot</span>
-        </div>
-        <h3>Discord Music Bot</h3>
-        <p class="what">
-          Joins a Discord voice channel and streams audio from a YouTube link on command.
-          Small, focused, and does exactly one thing well.
-        </p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">discord.py</span>
-          <span class="tag">YouTube</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-ghost" href="https://github.com/potat4190/discord-music-bot" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 5. TODO List CLI -->
+        <article class="card reveal" data-tags="python">
+          <div class="card-body">
+            <div class="card-head"><span class="chip">CLI Tool</span></div>
+            <h3>TODO List CLI</h3>
+            <p class="what">
+              A command-line TODO manager in Python: view, add, edit, and re-status tasks, each with a
+              category and an auto-assigned id. Saves after every change, and <code>--list-name</code>
+              lets you juggle several lists at once.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">argparse</span>
+              <span class="tag">CSV</span><span class="tag">CLI</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-ghost" href="https://github.com/potat4190/TODO-List-CLI-tool" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 5. This portfolio -->
-      <article class="card reveal"
-               data-tags="web javascript"
-               data-repo="https://github.com/potat4190/ProjectsDisplay">
-        <div class="card-head">
-          <span class="chip">Web</span>
-        </div>
-        <h3>This Portfolio</h3>
-        <p class="what">
-          The site you're reading. One handwritten HTML file, no framework, no build step —
-          deployed straight to GitHub Pages.
-        </p>
-        <div class="tags">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">GitHub Pages</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="https://potat4190.github.io/ProjectsDisplay/" target="_blank" rel="noopener noreferrer">
-            Open live site →
-          </a>
-          <a class="link-quiet" href="https://github.com/potat4190/ProjectsDisplay" target="_blank" rel="noopener noreferrer" aria-label="View portfolio source on GitHub">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 6. This portfolio -->
+        <article class="card reveal" data-tags="web javascript">
+          <div class="card-body">
+            <div class="card-head"><span class="chip">Web</span></div>
+            <h3>This Portfolio</h3>
+            <p class="what">
+              The site you're reading. One handwritten HTML file, no framework, no build step, zero
+              dependencies — every animation is native CSS. Deployed straight to GitHub Pages.
+            </p>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">CSS</span>
+              <span class="tag">JavaScript</span><span class="tag">GitHub Pages</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-primary" href="https://potat4190.github.io/ProjectsDisplay/" target="_blank" rel="noopener noreferrer">
+                Open live site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a class="link-quiet" href="https://github.com/potat4190/ProjectsDisplay" target="_blank" rel="noopener noreferrer" aria-label="View portfolio source on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 6. Coder or Gamer Quiz -->
-      <article class="card reveal"
-               data-tags="games java"
-               data-repo="https://github.com/potat4190/GamerOrCoder">
-        <div class="card-head">
-          <span class="chip">Games &amp; Mods</span>
-        </div>
-        <h3>Coder or Gamer Quiz</h3>
-        <p class="what">
-          A short quiz that scores your answers and tells you whether you're more coder or more
-          gamer. Written to practice OOP and file I/O in Java.
-        </p>
-        <div class="tags">
-          <span class="tag">Java</span>
-          <span class="tag">OOP</span>
-          <span class="tag">File I/O</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-ghost" href="https://github.com/potat4190/GamerOrCoder" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 7. Coder or Gamer Quiz -->
+        <article class="card reveal" data-tags="games java">
+          <div class="card-body">
+            <div class="card-head"><span class="chip">Games &amp; Mods</span></div>
+            <h3>Coder or Gamer Quiz</h3>
+            <p class="what">
+              A short quiz that scores your answers and works out the probability you're more coder
+              than gamer. Written to practice OOP and file I/O in Java.
+            </p>
+            <div class="tags">
+              <span class="tag">Java</span><span class="tag">OOP</span><span class="tag">File I/O</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-ghost" href="https://github.com/potat4190/GamerOrCoder" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 7. Snake Game -->
-      <article class="card reveal"
-               data-tags="games python"
-               data-repo="https://github.com/potat4190/Snake-Game">
-        <div class="card-head">
-          <span class="chip">Games &amp; Mods</span>
-        </div>
-        <h3>Snake Game</h3>
-        <p class="what">
-          The classic Snake, rebuilt from scratch in Python with a Tkinter GUI.
-          Grow the snake, eat the food, don't crash — how long can you last?
-        </p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">Tkinter</span>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-ghost" href="https://github.com/potat4190/Snake-Game" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-            View source
-          </a>
-        </div>
-      </article>
+        <!-- 8. Snake Game -->
+        <article class="card reveal" data-tags="games python">
+          <div class="card-body">
+            <div class="card-head"><span class="chip">Games &amp; Mods</span></div>
+            <h3>Snake Game</h3>
+            <p class="what">
+              The classic Snake, rebuilt from scratch in Python with a Tkinter GUI.
+              Grow the snake, eat the food, don't crash — how long can you last?
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Tkinter</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-ghost" href="https://github.com/potat4190/Snake-Game" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                View source
+              </a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 8. Personal Tutor AI — WIP -->
-      <article class="card reveal"
-               data-tags="ai python"
-               data-status="wip">
-        <div class="card-head">
-          <span class="chip wip">● In progress</span>
-        </div>
-        <h3>Personal Tutor AI</h3>
-        <p class="what">
-          A private tutor that adapts to your gaps — currently drafting the retrieval and
-          quiz-generation loop. I'll open the repo when there's something worth showing.
-        </p>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">RAG</span>
-          <span class="tag">LLM</span>
-        </div>
-        <div class="card-actions">
-          <span class="link-quiet" aria-live="polite">Coming soon — no dead links here.</span>
-        </div>
-      </article>
+        <!-- 9. Personal Tutor AI — WIP -->
+        <article class="card reveal" data-tags="ai python" data-status="wip">
+          <div class="card-body">
+            <div class="card-head"><span class="chip wip">● In progress</span></div>
+            <h3>Personal Tutor AI</h3>
+            <p class="what">
+              A private tutor that adapts to your gaps — currently drafting the retrieval and
+              quiz-generation loop. I'll open the repo when there's something worth showing.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">RAG</span><span class="tag">LLM</span>
+            </div>
+            <div class="card-actions">
+              <span class="link-quiet">Coming soon — no dead links here.</span>
+            </div>
+          </div>
+        </article>
 
+      </div>
     </div>
   </section>
 
-  <!-- ─── ABOUT ─── -->
+  <!-- ─────────────────────────── ABOUT ─────────────────────────── -->
   <section id="about" class="wrap about" aria-labelledby="about-title">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker">02 / About</div>
-        <h2 id="about-title">A bit about me</h2>
-      </div>
+    <div class="reveal">
+      <div class="kicker">02 / About</div>
+      <h2 id="about-title">A bit about me</h2>
     </div>
 
-    <div class="about-grid">
+    <div class="about-grid" style="margin-top: var(--s7)">
       <div class="reveal">
         <p>
           I'm a Computer Science (Honors) student at the University at Albany, SUNY,
@@ -892,51 +1105,84 @@ footer {
           things for other international students who are figuring out a new country
           the way I am now.
         </p>
+
+        <aside class="creds" aria-label="Quick facts">
+          <h3>Quick facts</h3>
+          <ul>
+            <li><span>School</span><span>UAlbany · CS Honors</span></li>
+            <li><span>Minor</span><span>Machine Learning Informatics</span></li>
+            <li><span>GPA</span><span>3.45 · Dean's List Fall 2025</span></li>
+            <li><span>Grad</span><span>2029 (expected)</span></li>
+            <li><span>Extra</span><span>Stanford Code in Place · AWS GenAI</span></li>
+            <li><span>Based in</span><span>Albany, NY · from Nepal</span></li>
+          </ul>
+        </aside>
       </div>
 
-      <aside class="creds reveal" aria-label="Quick facts">
-        <h3>Quick facts</h3>
-        <ul>
-          <li><span>School</span><span>UAlbany · CS Honors</span></li>
-          <li><span>Minor</span><span>Machine Learning Informatics</span></li>
-          <li><span>GPA</span><span>3.45 · Dean's List Fall 2025</span></li>
-          <li><span>Grad</span><span>2029 (expected)</span></li>
-          <li><span>Extra</span><span>Stanford Code in Place · AWS GenAI</span></li>
-          <li><span>Based in</span><span>Albany, NY · from Nepal</span></li>
-        </ul>
-      </aside>
+      <div class="portrait-stack reveal">
+        <div class="portrait">
+          <img src="images/optimized/portrait-640.webp"
+               srcset="images/optimized/portrait-640.webp 640w, images/optimized/portrait-1080.webp 1080w"
+               sizes="(min-width: 900px) 420px, 80vw"
+               width="640" height="854" loading="lazy" decoding="async"
+               alt="Rhidaya Shrestha, wearing glasses and a navy blazer over a white shirt, photographed against a grey studio backdrop." />
+        </div>
+        <div class="portrait-alt">
+          <img src="images/optimized/portrait-alt-480.webp"
+               srcset="images/optimized/portrait-alt-480.webp 480w, images/optimized/portrait-alt-960.webp 960w"
+               sizes="(min-width: 900px) 160px, 30vw"
+               width="480" height="640" loading="lazy" decoding="async"
+               alt="Rhidaya on a ferry in New York Harbor, wearing a bucket hat, with the Statue of Liberty in the background." />
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ─── CONTACT ─── -->
+  <!-- ─────────────────────────── CONTACT ─────────────────────────── -->
   <section id="contact" class="wrap" aria-labelledby="contact-title">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker">03 / Contact</div>
-        <h2 id="contact-title">Let's talk</h2>
-      </div>
+    <div class="reveal">
+      <div class="kicker">03 / Contact</div>
+      <h2 id="contact-title">Let's talk</h2>
+      <p class="section-sub">
+        The fastest ways to reach me. Email is best for anything long; WhatsApp for anything urgent.
+      </p>
     </div>
 
-    <p class="reveal" style="color:var(--muted); max-width: var(--measure);">
-      The fastest ways to reach me. Email is best for anything long; WhatsApp for anything urgent.
-    </p>
-
-    <div class="contact-grid reveal">
-      <a class="contact-card" href="mailto:rshrestha2@albany.edu">
-        <span class="label">Email</span>
+    <div class="contact-grid">
+      <a class="contact-card reveal" href="mailto:rshrestha2@albany.edu">
+        <span class="label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+          Email
+        </span>
         <span class="value">rshrestha2@albany.edu</span>
+        <span class="go" aria-hidden="true">Compose →</span>
       </a>
-      <a class="contact-card" href="https://www.linkedin.com/in/rhidaya-shrestha-a52850322/" target="_blank" rel="noopener noreferrer">
-        <span class="label">LinkedIn</span>
+
+      <a class="contact-card reveal" href="https://www.linkedin.com/in/rhidaya-shrestha-a52850322/" target="_blank" rel="noopener noreferrer">
+        <span class="label">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.71h.05c.53-.95 1.83-1.96 3.77-1.96 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.07-1.9-3.07-1.9 0-2.2 1.46-2.2 2.97V21h-4V9Z"/></svg>
+          LinkedIn
+        </span>
         <span class="value">/in/rhidaya-shrestha</span>
+        <span class="go" aria-hidden="true">Connect →</span>
       </a>
-      <a class="contact-card" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
-        <span class="label">GitHub</span>
+
+      <a class="contact-card reveal" href="https://github.com/potat4190" target="_blank" rel="noopener noreferrer">
+        <span class="label">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </span>
         <span class="value">@potat4190</span>
+        <span class="go" aria-hidden="true">Browse →</span>
       </a>
-      <a class="contact-card" href="https://wa.me/15182536421" target="_blank" rel="noopener noreferrer">
-        <span class="label">WhatsApp</span>
+
+      <a class="contact-card reveal" href="https://wa.me/15182536421" target="_blank" rel="noopener noreferrer">
+        <span class="label">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.09c-.25.69-1.44 1.32-1.98 1.36-.53.04-1.02.23-3.45-.72-2.9-1.14-4.74-4.1-4.88-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09 1-2.37c.26-.29.57-.36.76-.36l.55.01c.18.01.41-.07.64.49.25.6.83 2.07.9 2.22.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.49c-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.28.14.44.12.6-.07.16-.19.69-.81.88-1.08.18-.28.37-.23.62-.14.25.09 1.6.76 1.87.9.28.14.46.21.53.32.07.12.07.66-.18 1.35Z"/></svg>
+          WhatsApp
+        </span>
         <span class="value">+1 (518) 253-6421</span>
+        <span class="go" aria-hidden="true">Message →</span>
       </a>
     </div>
   </section>
@@ -944,13 +1190,25 @@ footer {
 </main>
 
 <footer>
-  <div class="wrap">&copy; 2026 Rhidaya Shrestha. Built with coffee and curiosity.</div>
+  <div class="wrap foot-inner">
+    <span>&copy; 2026 Rhidaya Shrestha. Built with coffee and curiosity.</span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/potat4190/ProjectsDisplay" target="_blank" rel="noopener noreferrer">Source</a>
+    </nav>
+  </div>
 </footer>
 
 <script>
 (() => {
-  // ---------- theme toggle (no storage) ----------
-  const root = document.documentElement;
+  'use strict';
+  const root  = document.documentElement;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const fine    = window.matchMedia('(pointer: fine)');
+
+  /* ---------- theme toggle (session only, no storage) ---------- */
   const toggle = document.getElementById('themeToggle');
   let theme = 'dark';
   root.setAttribute('data-theme', theme);
@@ -958,56 +1216,170 @@ footer {
     theme = theme === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', theme);
     toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    document.querySelector('meta[name="theme-color"]')
+      .setAttribute('content', theme === 'dark' ? '#010A03' : '#F3F7F4');
   });
 
-  // ---------- nav shadow on scroll ----------
+  /* ---------- nav border on scroll ---------- */
   const nav = document.getElementById('nav');
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ---------- filter bar ----------
-  const filters = document.querySelectorAll('.filter');
-  const cards = Array.from(document.querySelectorAll('#grid .card'));
+  /* ---------- scroll progress (fallback where scroll() is unsupported) ---------- */
+  if (!CSS.supports('animation-timeline: scroll()')) {
+    const bar = document.getElementById('progress');
+    let ticking = false;
+    const draw = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(draw); }
+    }, { passive: true });
+    draw();
+  }
 
-  // populate counts
+  /* ---------- active nav link ---------- */
+  const navLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+  const sections = navLinks
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+  if (sections.length) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        navLinks.forEach(a => a.removeAttribute('aria-current'));
+        const hit = navLinks.find(a => a.getAttribute('href') === '#' + e.target.id);
+        if (hit) hit.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => spy.observe(s));
+  }
+
+  /* ---------- filters + View Transitions ---------- */
+  const filters = [...document.querySelectorAll('.filter')];
+  const cards   = [...document.querySelectorAll('#grid .card')];
+  const note    = document.getElementById('resultNote');
+
+  cards.forEach((c, i) => { c.style.viewTransitionName = 'card-' + i; });
+
   const counts = { all: cards.length };
   cards.forEach(c => (c.dataset.tags || '').split(' ').forEach(t => {
-    if (!t) return;
-    counts[t] = (counts[t] || 0) + 1;
+    if (t) counts[t] = (counts[t] || 0) + 1;
   }));
   filters.forEach(f => {
-    const k = f.dataset.filter;
-    const n = counts[k] || 0;
-    const badge = document.createElement('span');
-    badge.className = 'count';
-    badge.textContent = n;
-    f.appendChild(badge);
+    f.querySelector('.count').textContent = counts[f.dataset.filter] || 0;
   });
+
+  const apply = key => {
+    let shown = 0;
+    cards.forEach(card => {
+      const show = key === 'all' || (card.dataset.tags || '').split(' ').includes(key);
+      card.hidden = !show;
+      card.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    const label = key === 'all'
+      ? 'all ' + shown + ' projects'
+      : shown + (shown === 1 ? ' project' : ' projects');
+    note.textContent = 'Showing ' + label;
+  };
 
   filters.forEach(f => {
     f.addEventListener('click', () => {
       filters.forEach(x => x.setAttribute('aria-pressed', 'false'));
       f.setAttribute('aria-pressed', 'true');
       const key = f.dataset.filter;
-      cards.forEach(card => {
-        const tags = (card.dataset.tags || '').split(' ');
-        const show = key === 'all' || tags.includes(key);
-        card.classList.toggle('hidden', !show);
-      });
+      if (document.startViewTransition && !reduced.matches) {
+        document.startViewTransition(() => apply(key));
+      } else {
+        apply(key);
+      }
     });
   });
 
-  // ---------- reveal on scroll ----------
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
+  /* ---------- reveal on scroll ---------- */
+  const revealables = [...document.querySelectorAll('.reveal')];
+  if (reduced.matches) {
+    revealables.forEach(el => el.classList.add('in'));
+  } else {
+    const groups = new Map();
+    revealables.forEach(el => {
+      const key = el.parentElement;
+      const list = groups.get(key) || [];
+      el.style.setProperty('--i', list.length);
+      list.push(el);
+      groups.set(key, list);
+    });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
         e.target.classList.add('in');
         io.unobserve(e.target);
-      }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+    revealables.forEach(el => io.observe(el));
+  }
+
+  /* ---------- cursor spotlight (rAF-batched, compositor-safe) ---------- */
+  if (fine.matches && !reduced.matches) {
+    const lit = [...document.querySelectorAll('.card, .contact-card')];
+    let queued = null, frame = 0;
+    const flush = () => {
+      frame = 0;
+      if (!queued) return;
+      const { el, x, y } = queued;
+      el.style.setProperty('--mx', x + '%');
+      el.style.setProperty('--my', y + '%');
+      queued = null;
+    };
+    lit.forEach(el => {
+      el.addEventListener('pointermove', ev => {
+        const r = el.getBoundingClientRect();
+        queued = {
+          el,
+          x: (((ev.clientX - r.left) / r.width)  * 100).toFixed(1),
+          y: (((ev.clientY - r.top)  / r.height) * 100).toFixed(1)
+        };
+        if (!frame) frame = requestAnimationFrame(flush);
+      }, { passive: true });
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  /* ---------- magnetic CTAs ---------- */
+  if (fine.matches && !reduced.matches) {
+    document.querySelectorAll('.magnetic').forEach(el => {
+      let frame = 0, tx = 0, ty = 0;
+      const move = () => { frame = 0; el.style.transform = 'translate(' + tx + 'px,' + ty + 'px)'; };
+      el.addEventListener('pointermove', ev => {
+        const r = el.getBoundingClientRect();
+        tx = ((ev.clientX - (r.left + r.width  / 2)) / r.width)  * 14;
+        ty = ((ev.clientY - (r.top  + r.height / 2)) / r.height) * 14;
+        if (!frame) frame = requestAnimationFrame(move);
+      }, { passive: true });
+      const reset = () => { el.style.transform = ''; };
+      el.addEventListener('pointerleave', reset, { passive: true });
+      el.addEventListener('blur', reset);
+    });
+  }
+
+  /* ---------- d20 roll flicker on hover ---------- */
+  const d20 = document.getElementById('d20roll');
+  if (d20 && !reduced.matches) {
+    const card = d20.closest('.card');
+    let timer = null;
+    card.addEventListener('pointerenter', () => {
+      let ticks = 0;
+      clearInterval(timer);
+      timer = setInterval(() => {
+        d20.textContent = 1 + Math.floor(Math.random() * 20);
+        if (++ticks > 11) { clearInterval(timer); d20.textContent = '20'; }
+      }, 70);
+    });
+    card.addEventListener('pointerleave', () => { clearInterval(timer); d20.textContent = '20'; });
+  }
 })();
 </script>
 </body>
