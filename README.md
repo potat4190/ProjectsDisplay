@@ -46,15 +46,16 @@ ProjectsDisplay/
 
 Every asset is referenced with a `./relative` path so the site works under `/ProjectsDisplay/` on GitHub Pages.
 
-## Setting up the contact form (Formspree)
+## Contact form (Formspree)
 
-1. Create a free account at [formspree.io](https://formspree.io) with **rhidayash@gmail.com** and add a new form.
-2. Copy the form's endpoint, which looks like `https://formspree.io/f/abcdwxyz`.
-3. In `index.html`, find `action="https://formspree.io/f/YOUR_FORM_ID"` and replace `YOUR_FORM_ID` with your id.
-4. Push. The first real submission asks you to confirm the address in your inbox.
+The form posts to Formspree form `maeqajno` (`https://formspree.io/f/maeqajno`), which delivers to **rhidayash@gmail.com**.
 
-Until step 3 is done, the form validates normally but tells visitors to use LinkedIn instead of failing silently.
-The form also includes Formspree's `_gotcha` honeypot field for spam.
+- `assets/js/main.js` validates the fields, then submits with `fetch` and `Accept: application/json`. The page doesn't reload:
+  success and error messages (including Formspree's own `errors[]`) appear under the button.
+- Fields sent: `name`, `email` (Formspree uses it as the reply-to), `topic`, `message`, plus `_subject` for the email subject line
+  and `_gotcha`, a hidden honeypot that Formspree uses to drop spam.
+- To switch forms, change the `action` on `#contactForm` in `index.html`. If the action ever contains `YOUR_FORM_ID`,
+  the form tells visitors to use LinkedIn instead of failing silently.
 
 ## Deployment
 
