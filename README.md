@@ -1,120 +1,92 @@
 <div align="center">
 
-# Rhidaya Shrestha — Portfolio
+# Rhidaya Shrestha · Portfolio
 
-**A single-file, zero-dependency portfolio site showcasing shipped projects — Chrome extensions, AI tools, and game mods.**
+**Projects, a printable resume, and a contact form. Plain HTML, Tailwind via CDN, and a little vanilla JavaScript.**
 
-[![Live Site](https://img.shields.io/badge/live-potat4190.github.io%2FProjectsDisplay-00FF7F?style=for-the-badge&logo=googlechrome&logoColor=010A03)](https://potat4190.github.io/ProjectsDisplay/)
-[![Deploy to Pages](https://img.shields.io/github/actions/workflow/status/potat4190/ProjectsDisplay/static.yml?branch=main&style=for-the-badge&label=deploy&labelColor=04120A&color=00FF7F)](https://github.com/potat4190/ProjectsDisplay/actions/workflows/static.yml)
-![Dependencies](https://img.shields.io/badge/dependencies-zero-00FF7F?style=for-the-badge&labelColor=04120A)
-![Build step](https://img.shields.io/badge/build%20step-none-00FF7F?style=for-the-badge&labelColor=04120A)
+[![Live site](https://img.shields.io/badge/live-potat4190.github.io%2FProjectsDisplay-DC143C?style=for-the-badge)](https://potat4190.github.io/ProjectsDisplay/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/potat4190/ProjectsDisplay/deploy.yml?branch=main&style=for-the-badge&label=deploy&color=003893)](https://github.com/potat4190/ProjectsDisplay/actions/workflows/deploy.yml)
 
 </div>
 
 <br />
 
-<img src=".github/assets/hero-screenshot.png" alt="Hero section of the portfolio site: a dark, green-tinted page reading &quot;CS student building small AI tools and shipping them,&quot; with a live-status eyebrow badge and two call-to-action buttons." width="100%" />
+<img src=".github/assets/hero-screenshot.png" alt="The portfolio hero in dark mode: the headline 'I build small tools and put them where people can use them', a crimson resume button, and a portrait in front of a crimson-and-blue double pennant." width="100%" />
 
-## About
+## What's here
 
-This repo is the source for my personal portfolio — one handwritten `index.html`, no framework,
-no bundler, no `node_modules`. It's deployed straight to GitHub Pages on every push to `main`.
+- **`index.html`**: the portfolio. Hero, filterable project grid, about with a timeline, and a contact form.
+- **`resume.html`**: a resume page that matches the site and prints to a single US Letter page. Its "Download PDF" button opens the browser's print dialog (choose *Save as PDF*).
 
-The site showcases **9 shipped projects** (Chrome extensions, AI-powered desktop apps, a Java
-battle simulator, a Minecraft mod, and more), each with a real "what it does" and "why it exists,"
-plus links that go somewhere real — no dead buttons.
+Small details worth knowing about:
 
-**Live:** **[potat4190.github.io/ProjectsDisplay](https://potat4190.github.io/ProjectsDisplay/)**
-
-## Features
-
-- **Filterable project grid** — filter by category (AI Tools, Web, Games & Mods) or language
-  (Python, JavaScript, Java), with live result counts and an `aria-live` status line for screen
-  readers. Filtering morphs the grid via the View Transitions API where supported.
-- **Dark / light theme toggle** — full second palette (`MASTER.md`), swapped instantly with no
-  flash, both verified at WCAG AA or better.
-- **Scroll-driven motion, all native CSS** — masked header text reveal, image parallax, and a
-  scroll-progress bar built on `animation-timeline: view()`/`scroll()`, with a JS fallback for
-  browsers that don't support it yet.
-- **Cursor-reactive cards** — a spotlight follows the pointer across each card (`pointer: fine`
-  only) and CTA buttons have a subtle magnetic pull toward the cursor.
-- **Fully responsive & accessible** — skip link, visible focus rings, sequential headings, 44px
-  minimum touch targets, and a complete `prefers-reduced-motion` fallback that turns off every
-  transform and transition while keeping content visible.
-- **Fast by default** — images are WebP with `srcset`/`sizes`, explicit dimensions, and
-  `loading="lazy"`; the original 4.58MB source photo set ships as 204KB (−96%). Zero JS
-  dependencies, zero web fonts beyond the three already used for the wordmark.
-
-## Tech stack
-
-Plain HTML, CSS, and vanilla JavaScript — no framework, no build tooling, no package manager.
-Everything (markup, styles, and behavior) lives in the one `index.html` file by design, so the
-whole site can be understood by opening one file and reading top to bottom.
+- Press <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd> (or <kbd>/</kbd>) to jump to any section or project.
+- The theme toggle remembers your choice and otherwise follows your OS.
+- Going between the two pages uses cross-document View Transitions in browsers that support them.
+- With `prefers-reduced-motion` set, every animation turns off and the content still shows.
 
 ## Project structure
 
 ```
 ProjectsDisplay/
-├── index.html               # The entire site: markup, styles, and script
-├── MASTER.md                # Design system — single source of truth for every token
-├── images/
-│   ├── optimized/            # WebP images actually referenced by the site
-│   ├── Project Pictures/     # Source screenshots for project cards
-│   └── My Pictures/          # Source portrait photography
+├── index.html                 # portfolio
+├── resume.html                # resume (screen + print)
+├── assets/
+│   ├── css/site.css           # design tokens, motion, components
+│   ├── css/resume.css         # resume sheet + print rules
+│   ├── js/tailwind.config.js  # shared Tailwind CDN config (colors → CSS variables)
+│   ├── js/main.js             # theme, reveals, filter, ⌘K, form, copy-to-clipboard
+│   └── img/                   # favicon, photos/, projects/ (only what the site loads)
+├── _source/                   # original photos and screenshots, not deployed
+├── docs/DESIGN.md             # design system
 └── .github/
-    ├── workflows/static.yml  # Deploys to GitHub Pages on every push to main
-    └── assets/               # Images used only in this README
+    ├── workflows/deploy.yml   # GitHub Pages deploy on push to main
+    └── scripts/check-links.sh # fails the build on missing files or /absolute paths
 ```
 
-## Design system
+Every asset is referenced with a `./relative` path so the site works under `/ProjectsDisplay/` on GitHub Pages.
 
-Every color, font size, spacing value, radius, and animation curve on the site is a token
-defined once in **[`MASTER.md`](MASTER.md)** — nothing is a magic number. It documents the
-"Terminal Green" visual direction (a green-tinted near-black interface with a single spring-green
-accent), the full light/dark palette with verified WCAG contrast ratios, the type scale, motion
-timing, and the "5 states" (`default · hover · focus-visible · active · disabled`) every
-interactive component implements. Read it before changing any visual detail in `index.html`.
+## Setting up the contact form (Formspree)
 
-## Running locally
+1. Create a free account at [formspree.io](https://formspree.io) with **rhidayash@gmail.com** and add a new form.
+2. Copy the form's endpoint, which looks like `https://formspree.io/f/abcdwxyz`.
+3. In `index.html`, find `action="https://formspree.io/f/YOUR_FORM_ID"` and replace `YOUR_FORM_ID` with your id.
+4. Push. The first real submission asks you to confirm the address in your inbox.
 
-No install, no build step — it's a static file.
-
-```bash
-git clone https://github.com/potat4190/ProjectsDisplay.git
-cd ProjectsDisplay
-```
-
-Then either open `index.html` directly in a browser, or serve it so relative image paths and
-`fetch`-based features behave exactly as they will in production:
-
-```bash
-python -m http.server 8080
-# → http://localhost:8080
-```
-
-Any static file server works (`npx serve`, VS Code's Live Server extension, etc.).
+Until step 3 is done, the form validates normally but tells visitors to use LinkedIn instead of failing silently.
+The form also includes Formspree's `_gotcha` honeypot field for spam.
 
 ## Deployment
 
-Pushing to `main` triggers **[`.github/workflows/static.yml`](.github/workflows/static.yml)**,
-which uploads the repository as-is and publishes it to GitHub Pages — no build step in CI either.
-The workflow can also be run manually from the Actions tab.
+`.github/workflows/deploy.yml` runs on every push to `main` (and manually from the Actions tab):
+
+1. checks every local `src`/`href`/`srcset` in both pages and every `url()` in the CSS,
+2. copies only `index.html`, `resume.html` and `assets/` into `_site/`,
+3. uploads `_site` and deploys it to GitHub Pages.
+
+**One-time setup:** repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+## Running locally
+
+No build step. Serve the folder with any static server so relative paths behave like production:
+
+```bash
+python -m http.server 8080
+```
+
+Then open http://localhost:8080. To run the same link check CI runs:
+
+```bash
+bash .github/scripts/check-links.sh index.html resume.html
+```
 
 ## Editing content
 
-Projects are `<article class="card">` elements inside `#grid` in `index.html`; each one carries
-a `data-tags` attribute the filter script reads (space-separated category/language keys). To add
-a project, copy an existing card, update its copy, tags, links, and — if it has a screenshot —
-add a `<picture>`/`<img>` block matching the pattern used by the flagship cards, with a WebP
-dropped into `images/optimized/`.
-
-## License
-
-No license file yet — this is a personal portfolio. Feel free to read the code for reference,
-but please don't redeploy it as-is under your own name.
+- **Projects** are `<article class="card">` blocks in `#projectGrid`. `data-tags` drives the filter (`python`, `java`, `js`, `live`),
+  and `data-title` is the name shown in the ⌘K menu. Big cards use `lg:col-span-3` and small ones use `lg:col-span-2`.
+- **Screenshots** go in `assets/img/projects/`. Keep the original in `_source/`.
+- **Resume** content lives directly in `resume.html`. After editing, print-preview it to check it still fits on one page.
 
 ## Contact
 
-- **Email:** [rshrestha2@albany.edu](mailto:rshrestha2@albany.edu)
-- **LinkedIn:** [/in/rhidaya-shrestha](https://www.linkedin.com/in/rhidaya-shrestha-a52850322/)
-- **GitHub:** [@potat4190](https://github.com/potat4190)
+[LinkedIn](https://www.linkedin.com/in/rhidaya-shrestha/) · Discord `potat.4190` · [GitHub](https://github.com/potat4190)

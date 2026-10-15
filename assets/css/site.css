@@ -1,0 +1,367 @@
+/* ============================================================
+   Pennant design system. Tokens are documented in docs/DESIGN.md.
+   Tailwind (via CDN) handles layout utilities; this file holds the
+   tokens, motion, and the few components utilities can't express.
+   ============================================================ */
+
+/* ---------- 1. Tokens (HSL channels, shadcn style) ---------- */
+:root {
+  --background: 0 0% 98%;          /* #FAFAFA zinc paper */
+  --foreground: 240 6% 10%;        /* #18181B ink */
+  --card: 0 0% 100%;
+  --muted: 240 5% 95%;
+  --muted-foreground: 240 4% 34%;  /* #52525B, 7.3:1 on paper */
+  --border: 240 6% 89%;
+  --input: 240 6% 84%;
+  --primary: 348 83% 47%;          /* #DC143C Nepal crimson, white text 5:1 */
+  --primary-foreground: 0 0% 100%;
+  --accent: 351 85% 40%;           /* crimson for text on paper, 6.3:1 */
+  --flag: 221 100% 29%;            /* #003893 Nepal flag blue */
+  --ring: 221 100% 29%;
+  --radius: 0.75rem;
+
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --dur-fast: 150ms;
+  --dur: 280ms;
+  --dur-slow: 600ms;
+
+  color-scheme: light;
+}
+
+/* No-JS fallback: follow the OS. JS always sets data-theme explicitly. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 96%;
+    --card: 240 6% 7%;
+    --muted: 240 4% 12%;
+    --muted-foreground: 240 5% 65%;
+    --border: 240 4% 17%;
+    --input: 240 4% 24%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 0 0% 100%;
+    --accent: 351 95% 74%;
+    --flag: 226 100% 76%;
+    --ring: 226 100% 76%;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --background: 240 10% 4%;        /* #09090B */
+  --foreground: 0 0% 96%;
+  --card: 240 6% 7%;
+  --muted: 240 4% 12%;
+  --muted-foreground: 240 5% 65%;  /* #A1A1AA, 7.6:1 */
+  --border: 240 4% 17%;
+  --input: 240 4% 24%;
+  --primary: 347 77% 50%;          /* #E11D48, white text 4.7:1 */
+  --primary-foreground: 0 0% 100%;
+  --accent: 351 95% 74%;           /* #FB7C90 for crimson text on dark */
+  --flag: 226 100% 76%;            /* flag blue lifted for dark */
+  --ring: 226 100% 76%;
+  color-scheme: dark;
+}
+
+/* ---------- 2. Base ---------- */
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+::selection { background: hsl(var(--primary) / .18); }
+:focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 3px; border-radius: 6px; }
+[id] { scroll-margin-top: 88px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: .5rem; z-index: 100;
+  padding: .6rem 1rem; border-radius: .5rem;
+  background: hsl(var(--foreground)); color: hsl(var(--background)); font-weight: 600;
+}
+.skip-link:focus { left: .5rem; }
+
+/* Display type: Bricolage at its tight optical size */
+.font-display { font-optical-sizing: auto; letter-spacing: -.035em; }
+
+/* ---------- 3. Header ---------- */
+.site-header {
+  view-transition-name: site-header;
+  background: hsl(var(--background) / .78);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease-out);
+}
+.site-header.is-scrolled { border-bottom-color: hsl(var(--border)); }
+
+.brand-mark path { fill: hsl(var(--primary)); stroke: hsl(var(--flag)); stroke-width: 6; stroke-linejoin: round; }
+.brand:hover .brand-mark { transform: rotate(-6deg); }
+.brand-mark { transition: transform var(--dur) var(--ease-out); transform-origin: 10% 90%; }
+
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ""; position: absolute; left: .75rem; right: .75rem; bottom: .35rem; height: 1px;
+  background: hsl(var(--primary)); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur) var(--ease-out);
+}
+.nav-link:hover::after, .nav-link[aria-current="true"]::after { transform: scaleX(1); }
+
+/* theme icon swap */
+.icon-sun { display: none; }
+:root[data-theme="dark"] .icon-sun { display: block; }
+:root[data-theme="dark"] .icon-moon { display: none; }
+
+/* ---------- 4. Buttons (shadcn variants) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  height: 2.75rem; padding: 0 1.1rem; border-radius: calc(var(--radius) - 2px);
+  font-size: .9rem; font-weight: 500; white-space: nowrap; cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform var(--dur) var(--ease-out), background-color var(--dur-fast), border-color var(--dur-fast),
+              box-shadow var(--dur) var(--ease-out), color var(--dur-fast);
+}
+.btn svg { width: 1rem; height: 1rem; flex: none; }
+.btn:active { transform: translateY(0) scale(.98); }
+.btn-primary { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px hsl(var(--primary) / .65); }
+.btn-outline { background: hsl(var(--card)); border-color: hsl(var(--border)); color: hsl(var(--foreground)); }
+.btn-outline:hover { background: hsl(var(--muted)); border-color: hsl(var(--input)); transform: translateY(-1px); }
+.btn-ghost { color: hsl(var(--muted-foreground)); height: 2.25rem; padding: 0 .7rem; }
+.btn-ghost:hover { color: hsl(var(--foreground)); background: hsl(var(--muted)); }
+.btn[disabled] { opacity: .6; pointer-events: none; }
+
+/* Resume CTA: a fold-corner sheet icon that lifts on hover */
+.btn-resume .sheet { transition: transform var(--dur) var(--ease-out); }
+.btn-resume:hover .sheet { transform: translateY(-2px) rotate(-4deg); }
+.btn-resume .arrow { transition: transform var(--dur) var(--ease-out); }
+.btn-resume:hover .arrow { transform: translateY(2px); }
+
+kbd {
+  font-family: "Geist Mono", ui-monospace, monospace; font-size: .7rem;
+  padding: .1rem .35rem; border-radius: .3rem;
+  border: 1px solid hsl(var(--border)); background: hsl(var(--muted)); color: hsl(var(--muted-foreground));
+}
+
+/* ---------- 5. Hero ---------- */
+.line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.line > span { display: inline-block; transform: translateY(108%); animation: rise .95s var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
+@keyframes rise { to { transform: translateY(0); } }
+.fade-up { opacity: 0; transform: translateY(12px); animation: fadeUp .8s var(--ease-out) forwards; animation-delay: var(--d, 0ms); }
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+.status-dot { position: relative; width: .5rem; height: .5rem; border-radius: 999px; background: hsl(var(--primary)); }
+.status-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: hsl(var(--primary));
+  animation: ping 2.2s var(--ease-out) infinite;
+}
+@keyframes ping { 0% { transform: scale(1); opacity: .6; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
+
+/* The signature: Nepal's double pennant, drawn on load, swaying on its pole */
+.hero-figure { position: relative; aspect-ratio: 5 / 6; perspective: 1200px; }
+.pennant { position: absolute; top: 0; left: 6%; width: 68%; height: auto; overflow: visible; }
+.pennant .sway { transform-origin: 0% 50%; animation: sway 7s ease-in-out 2.2s infinite alternate; }
+@keyframes sway { from { transform: skewY(0deg) scaleX(1); } to { transform: skewY(-1.6deg) scaleX(.985); } }
+.pennant .cloth {
+  fill: hsl(var(--primary)); fill-opacity: 0;
+  stroke: hsl(var(--flag)); stroke-width: 2.4; stroke-linejoin: miter;
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: draw 1.5s var(--ease-out) .35s forwards, fill .9s ease 1.35s forwards;
+}
+.pennant .pole { stroke: hsl(var(--foreground) / .7); stroke-width: 1.2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .7s var(--ease-out) .1s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fill { to { fill-opacity: .96; } }
+
+.portrait-card {
+  position: absolute; right: 0; bottom: 0; width: 56%;
+  border-radius: 1.1rem; overflow: hidden;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  box-shadow: 0 30px 60px -28px hsl(240 10% 4% / .45), 0 2px 6px -2px hsl(240 10% 4% / .12);
+  transform: rotate(2.5deg) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .5s var(--ease-out);
+  opacity: 0; animation: cardIn 1s var(--ease-out) .55s forwards;
+}
+@keyframes cardIn { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
+.portrait-card img { width: 100%; height: auto; display: block; }
+.portrait-caption {
+  position: absolute; left: 4%; bottom: 4%;
+  opacity: 0; animation: fadeUp .8s var(--ease-out) 1.4s forwards; transform: translateY(12px);
+}
+
+/* ---------- 6. Section labels ---------- */
+.eyebrow {
+  font-family: "Geist Mono", ui-monospace, monospace; font-size: .72rem; letter-spacing: .14em;
+  text-transform: uppercase; color: hsl(var(--muted-foreground));
+  display: inline-flex; align-items: center; gap: .6rem;
+}
+.eyebrow::before { content: ""; width: 1.25rem; height: 2px; background: hsl(var(--primary)); border-radius: 2px; }
+
+/* ---------- 7. Filter tabs ---------- */
+.tabs { position: relative; display: inline-flex; gap: .25rem; padding: .25rem; border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--muted)); border: 1px solid hsl(var(--border)); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  position: relative; z-index: 1; display: inline-flex; align-items: center; gap: .45rem;
+  height: 2.25rem; padding: 0 .85rem; border-radius: calc(var(--radius) - 5px);
+  font-size: .85rem; font-weight: 500; color: hsl(var(--muted-foreground)); white-space: nowrap; cursor: pointer;
+  transition: color var(--dur-fast);
+}
+.tab:hover { color: hsl(var(--foreground)); }
+.tab[aria-pressed="true"] { color: hsl(var(--foreground)); }
+.tab .count { font-family: "Geist Mono", monospace; font-size: .7rem; opacity: .6; }
+.tab-indicator {
+  position: absolute; z-index: 0; top: .25rem; left: 0; height: 2.25rem; width: 0;
+  border-radius: calc(var(--radius) - 5px); background: hsl(var(--card));
+  box-shadow: 0 1px 3px hsl(240 10% 4% / .12), 0 0 0 1px hsl(var(--border));
+  transition: transform .4s var(--ease-out), width .4s var(--ease-out);
+}
+
+/* ---------- 8. Project cards ---------- */
+.card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: var(--radius);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur), box-shadow var(--dur) var(--ease-out);
+}
+.card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2; opacity: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), hsl(var(--primary) / .07), transparent 60%);
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.card:hover { transform: translateY(-3px); border-color: hsl(var(--input)); box-shadow: 0 24px 48px -32px hsl(240 10% 4% / .35); }
+.card:hover::before { opacity: 1; }
+.card:focus-within { border-color: hsl(var(--ring) / .6); }
+.card.is-hidden { display: none; }
+
+.card-media { position: relative; overflow: hidden; border-bottom: 1px solid hsl(var(--border)); background: hsl(240 10% 6%); }
+/* aspect-ratio + object-position come from Tailwind classes on each <img> */
+.card-media img { width: 100%; height: auto; object-fit: cover; transform-origin: 0 0; transition: transform .9s var(--ease-out); }
+.card:hover .card-media img { transform: scale(1.03); }
+/* browser chrome strip so screenshots read as real apps */
+.chrome { display: flex; align-items: center; gap: .35rem; height: 1.75rem; padding: 0 .75rem; background: hsl(240 6% 10%); border-bottom: 1px solid hsl(240 4% 18%); }
+.chrome i { width: .5rem; height: .5rem; border-radius: 999px; background: hsl(240 4% 30%); }
+.chrome span { margin-left: .5rem; font: 500 .66rem/1 "Geist Mono", monospace; color: hsl(240 5% 65%); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: .4rem; height: 1.5rem; padding: 0 .55rem;
+  border-radius: 999px; border: 1px solid hsl(var(--border)); background: hsl(var(--muted));
+  font: 500 .7rem/1 "Geist Mono", monospace; color: hsl(var(--muted-foreground)); white-space: nowrap;
+}
+.badge-live { color: hsl(var(--accent)); border-color: hsl(var(--primary) / .3); background: hsl(var(--primary) / .07); }
+.badge-live::before { content: ""; width: .4rem; height: .4rem; border-radius: 999px; background: currentColor; }
+.badge-team { color: hsl(var(--flag)); border-color: hsl(var(--flag) / .3); background: hsl(var(--flag) / .07); }
+
+.tag { font: 500 .7rem/1 "Geist Mono", monospace; color: hsl(var(--muted-foreground)); padding: .3rem .5rem; border-radius: .35rem; border: 1px dashed hsl(var(--border)); }
+
+.link-arrow { display: inline-flex; align-items: center; gap: .35rem; font-size: .85rem; font-weight: 500; color: hsl(var(--foreground)); min-height: 2.25rem; }
+.link-arrow svg { width: .9rem; height: .9rem; transition: transform var(--dur) var(--ease-out); }
+.link-arrow:hover { color: hsl(var(--accent)); }
+.link-arrow:hover svg { transform: translate(2px, -2px); }
+
+/* Battle Simulator d20 (coded art, no screenshot exists) */
+.d20 .wire { fill: none; stroke: hsl(var(--muted-foreground) / .55); stroke-width: 1.2; stroke-linejoin: round; }
+.d20 .face { fill: hsl(var(--primary) / .12); stroke: hsl(var(--primary)); stroke-width: 1.5; stroke-linejoin: round; }
+.d20 .roll { font: 600 17px "Geist Mono", monospace; fill: hsl(var(--accent)); text-anchor: middle; dominant-baseline: central; }
+.d20-spin { transform-origin: 60px 60px; animation: spin 22s linear infinite; }
+.card:hover .d20-spin { animation-duration: 6s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Terminal mock for CLI / bot cards */
+.term { font: 400 .74rem/1.65 "Geist Mono", monospace; color: hsl(240 5% 75%); background: hsl(240 10% 6%); }
+.term .p { color: hsl(351 95% 74%); }
+.term .c { color: hsl(226 100% 80%); }
+.term .dim { color: hsl(240 5% 50%); }
+
+/* ---------- 9. About timeline ---------- */
+.timeline { position: relative; }
+.timeline::before { content: ""; position: absolute; left: 4.5rem; top: .5rem; bottom: .5rem; width: 1px; background: hsl(var(--border)); }
+.timeline li { position: relative; display: grid; grid-template-columns: 4.5rem 1fr; gap: 1.5rem; padding: .7rem 0; }
+.timeline li::before {
+  content: ""; position: absolute; left: calc(4.5rem - 4px); top: 1.15rem; width: 9px; height: 9px; border-radius: 999px;
+  background: hsl(var(--background)); border: 2px solid hsl(var(--muted-foreground) / .6);
+}
+.timeline li.now::before { border-color: hsl(var(--primary)); background: hsl(var(--primary)); }
+@media (max-width: 420px) {
+  .timeline::before { left: 3.6rem; }
+  .timeline li { grid-template-columns: 3.6rem 1fr; gap: 1.1rem; }
+  .timeline li::before { left: calc(3.6rem - 4px); }
+}
+
+/* ---------- 10. Form ---------- */
+.field { display: grid; gap: .45rem; }
+.label { font-size: .85rem; font-weight: 500; }
+.input {
+  width: 100%; height: 2.75rem; padding: 0 .85rem; border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--background)); border: 1px solid hsl(var(--input)); color: hsl(var(--foreground));
+  font-size: .95rem; transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+textarea.input { height: auto; min-height: 9rem; padding: .7rem .85rem; resize: vertical; line-height: 1.55; }
+select.input { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; background-size: 1rem; padding-right: 2.25rem; }
+.input::placeholder { color: hsl(var(--muted-foreground) / .75); }
+.input:hover { border-color: hsl(var(--muted-foreground) / .5); }
+.input:focus { outline: none; border-color: hsl(var(--ring)); box-shadow: 0 0 0 3px hsl(var(--ring) / .18); }
+.input[aria-invalid="true"] { border-color: hsl(var(--primary)); box-shadow: 0 0 0 3px hsl(var(--primary) / .14); }
+.field-error { font-size: .78rem; color: hsl(var(--accent)); min-height: 1rem; }
+.hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+
+.spinner { width: 1rem; height: 1rem; border-radius: 999px; border: 2px solid currentColor; border-right-color: transparent; animation: spin .7s linear infinite; }
+.form-status { display: none; }
+.form-status.show { display: flex; animation: fadeUp .5s var(--ease-out) both; }
+
+.contact-link { transition: border-color var(--dur), background-color var(--dur), transform var(--dur) var(--ease-out); }
+.contact-link:hover { border-color: hsl(var(--input)); background: hsl(var(--muted)); transform: translateX(3px); }
+
+/* ---------- 11. Command palette ---------- */
+dialog.cmdk { width: min(560px, calc(100vw - 2rem)); margin: 12vh auto auto; padding: 0; border: 1px solid hsl(var(--border));
+  border-radius: var(--radius); background: hsl(var(--card)); color: hsl(var(--foreground));
+  box-shadow: 0 40px 80px -30px hsl(240 10% 4% / .5); }
+dialog.cmdk::backdrop { background: hsl(240 10% 4% / .45); backdrop-filter: blur(3px); }
+dialog.cmdk[open] { animation: pop .22s var(--ease-out); }
+@keyframes pop { from { opacity: 0; transform: translateY(-8px) scale(.98); } }
+.cmdk-item { display: flex; align-items: center; gap: .75rem; width: 100%; padding: .6rem .75rem; border-radius: calc(var(--radius) - 4px); font-size: .9rem; text-align: left; cursor: pointer; }
+.cmdk-item svg { width: 1rem; height: 1rem; color: hsl(var(--muted-foreground)); flex: none; }
+.cmdk-item[aria-selected="true"] { background: hsl(var(--muted)); }
+.cmdk-item[aria-selected="true"] svg { color: hsl(var(--accent)); }
+.cmdk-group { padding: .5rem .75rem .25rem; font: 500 .68rem/1 "Geist Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: hsl(var(--muted-foreground)); }
+
+/* ---------- 12. Toast ---------- */
+.toast { position: fixed; left: 50%; bottom: 1.5rem; z-index: 90; translate: -50% 1rem; opacity: 0; pointer-events: none;
+  display: flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border-radius: calc(var(--radius) - 2px);
+  background: hsl(var(--foreground)); color: hsl(var(--background)); font-size: .875rem; font-weight: 500;
+  box-shadow: 0 20px 40px -20px hsl(240 10% 4% / .5); transition: opacity .25s var(--ease-out), translate .35s var(--ease-out); }
+.toast.show { opacity: 1; translate: -50% 0; }
+
+/* ---------- 13. Scroll reveal ---------- */
+/* Uses `translate` (not transform) so hover lifts keep working; main.js strips
+   these classes once the entrance finishes so components get their own transitions back. */
+.js .reveal { opacity: 0; translate: 0 16px; }
+.js .reveal.is-in { opacity: 1; translate: 0 0; transition: opacity .7s var(--ease-out), translate .7s var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+
+/* ---------- 14. Page + filter transitions ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vtOut .22s var(--ease-in) both; }
+::view-transition-new(root) { animation: vtIn .45s var(--ease-out) both; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(10px); } }
+::view-transition-group(*) { animation-duration: .45s; animation-timing-function: var(--ease-out); }
+/* Same-document transitions (filter, theme) skip the page-level fade */
+html.vt-local::view-transition-old(root),
+html.vt-local::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+
+/* Quick-nav jump highlight */
+.card.flash { animation: flash 1.8s var(--ease-out); }
+@keyframes flash { 0%, 35% { box-shadow: 0 0 0 3px hsl(var(--ring) / .65); } 100% { box-shadow: 0 0 0 0 hsl(var(--ring) / 0); } }
+
+/* ---------- 15. Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .line > span, .fade-up, .portrait-card, .portrait-caption { transform: none !important; opacity: 1 !important; translate: none !important; }
+  .js .reveal { opacity: 1; translate: none; }
+  .card:hover, .btn:hover, .contact-link:hover { transform: none; }
+  .card::before { display: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
