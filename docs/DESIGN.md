@@ -40,7 +40,8 @@ The resume sheet always uses the light values so it looks the same on screen and
 
 The moments that move:
 
-- **Page load:** the headline rises line by line, the pennant's outline draws and then fills, and the portrait card settles in.
+- **Page load:** the headline rises line by line, the pennant's outline draws and then fills, the moon and sun spin in, and the portrait card settles in.
+  After that, the sun turns slowly (48s per rotation) and the moon's rays breathe.
 - **Scroll:** sections fade up, staggered by 70 ms.
 - **Hover:** cards lift 3px with a crimson spotlight that follows the cursor. Buttons lift 1px. The d20 rerolls on the Battle Simulator card.
 - **Filter:** the tab indicator slides, and cards morph into place with same-document View Transitions.

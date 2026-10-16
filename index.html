@@ -99,13 +99,13 @@
       </p>
 
       <h1 id="hero-title" class="font-display text-[clamp(2.5rem,5.4vw,3.9rem)] font-extrabold leading-[.98] lg:whitespace-nowrap">
-        <span class="line"><span style="--i:0">I build small tools</span></span>
-        <span class="line"><span style="--i:1">and put them where</span></span>
-        <span class="line"><span style="--i:2">people <span class="text-accent">can use them.</span></span></span>
+        <span class="line"><span style="--i:0">Studying CS,</span></span>
+        <span class="line"><span style="--i:1">building small tools</span></span>
+        <span class="line"><span style="--i:2" class="text-accent">for the fun of it.</span></span>
       </h1>
 
       <p class="fade-up mt-7 max-w-[58ch] text-lg leading-relaxed text-muted-foreground" style="--d:350ms">
-        I'm Rhidaya, a Computer Science (Honors) sophomore at the University at Albany. So far that has meant
+        I'm Rhidaya, a Computer Science (Honors) sophomore at the University at Albany. A few things I've made so far:
         a Chrome extension on the Web Store, a verse-memory app running on Vercel, a Discord music bot,
         and a Minecraft mod other players download.
       </p>
@@ -145,6 +145,20 @@
         <line class="pole" x1="0" y1="-2" x2="0" y2="132" pathLength="1" />
         <g class="sway">
           <path class="cloth" pathLength="1" d="M0 0 L100 58 L38 58 L100 122 L0 122 Z" />
+          <!-- Moon: a crescent (outer circle minus a higher inner circle, horns flaring up)
+               holding a 20-ray sun that sinks into it. The sun is clipped to the crescent's
+               outer circle so its lower rays never poke out below the moon. -->
+          <clipPath id="moonClip"><circle cx="25" cy="29.43" r="13.04" /></clipPath>
+          <g class="emblem moon">
+            <g clip-path="url(#moonClip)">
+              <path class="moon-rays" d="M25.00 27.50 L25.93 29.95 L27.57 27.91 L27.70 30.53 L29.90 29.09 L29.21 31.62 L31.74 30.93 L30.30 33.13 L32.92 33.26 L30.88 34.90 L33.33 35.83 L30.88 36.76 L32.92 38.41 L30.30 38.53 L31.74 40.73 L29.21 40.04 L29.90 42.57 L27.70 41.14 L27.57 43.76 L25.93 41.71 L25.00 44.17 L24.07 41.71 L22.43 43.76 L22.30 41.14 L20.10 42.57 L20.79 40.04 L18.26 40.73 L19.70 38.53 L17.08 38.41 L19.12 36.76 L16.67 35.83 L19.12 34.90 L17.08 33.26 L19.70 33.13 L18.26 30.93 L20.79 31.62 L20.10 29.09 L22.30 30.53 L22.43 27.91 L24.07 29.95 Z" />
+            </g>
+            <path d="M12.01 30.59 A13.04 13.04 0 0 0 37.99 30.59 A14.61 14.61 0 0 1 12.01 30.59 Z" />
+          </g>
+          <!-- Sun: twelve-pointed star -->
+          <g class="emblem sun">
+            <path class="sun-star" d="M26.00 84.80 L29.49 79.96 L30.10 85.90 L35.55 83.45 L33.10 88.90 L39.04 89.51 L34.20 93.00 L39.04 96.49 L33.10 97.10 L35.55 102.55 L30.10 100.10 L29.49 106.04 L26.00 101.20 L22.51 106.04 L21.90 100.10 L16.45 102.55 L18.90 97.10 L12.96 96.49 L17.80 93.00 L12.96 89.51 L18.90 88.90 L16.45 83.45 L21.90 85.90 L22.51 79.96 Z" />
+          </g>
         </g>
       </svg>
 
@@ -556,8 +570,8 @@
           </button>
         </div>
 
-        <div class="form-status mt-5 items-start gap-3 rounded-lg border p-4 text-sm" id="formStatus" role="status" aria-live="polite">
-          <svg class="mt-0.5 h-4 w-4 flex-none"><use href="#i-check"/></svg>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite">
+          <svg class="h-4 w-4 flex-none" aria-hidden="true"><use href="#i-check"/></svg>
           <p></p>
         </div>
       </form>

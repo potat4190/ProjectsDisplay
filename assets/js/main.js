@@ -339,8 +339,7 @@
     function showStatus(kind, text) {
       status.classList.remove('show');
       void status.offsetWidth;
-      status.className = 'form-status show mt-5 items-start gap-3 rounded-lg border p-4 text-sm ' +
-        (kind === 'ok' ? 'border-border bg-muted text-foreground' : 'border-primary/30 bg-primary/5 text-accent');
+      status.className = 'form-status show ' + (kind === 'ok' ? 'is-ok' : 'is-error');
       $('use', status).setAttribute('href', kind === 'ok' ? '#i-check' : '#i-alert');
       $('p', status).textContent = text;
     }
@@ -366,13 +365,14 @@
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (res.ok) {
-          const email = fields.email.el.value.trim();
           form.reset();
           attempted = false;
-          showStatus('ok', `Message sent. I'll reply to ${email}.`);
+          showStatus('ok', 'Message sent');
         } else {
           const data = await res.json().catch(() => ({}));
-          const detail = data && data.errors ? data.errors.map((x) => x.message).join(' ') : `The form service returned ${res.status}.`;
+          // Formspree messages arrive lowercase without punctuation ("should be an email")
+          const sentence = (m) => m.charAt(0).toUpperCase() + m.slice(1).replace(/\.?$/, '.');
+          const detail = data && data.errors ? data.errors.map((x) => sentence(String(x.message || ''))).join(' ') : `The form service returned ${res.status}.`;
           showStatus('error', `That didn't go through. ${detail} Try again, or message me on LinkedIn.`);
         }
       } catch (err) {

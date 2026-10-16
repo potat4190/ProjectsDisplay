@@ -11,7 +11,7 @@
 
 <br />
 
-<img src=".github/assets/hero-screenshot.png" alt="The portfolio hero in dark mode: the headline 'I build small tools and put them where people can use them', a crimson resume button, and a portrait in front of a crimson-and-blue double pennant." width="100%" />
+<img src=".github/assets/hero-screenshot.png" alt="The portfolio hero in dark mode: the headline 'Studying CS, building small tools for the fun of it', a crimson resume button, and a portrait in front of Nepal's double pennant with its white moon and sun." width="100%" />
 
 ## What's here
 
