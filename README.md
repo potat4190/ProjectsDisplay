@@ -87,6 +87,8 @@ bash .github/scripts/check-links.sh index.html resume.html
   and `data-title` is the name shown in the ⌘K menu. Big cards use `lg:col-span-3` and small ones use `lg:col-span-2`.
 - **Screenshots** go in `assets/img/projects/`. Keep the original in `_source/`.
 - **Resume** content lives directly in `resume.html`. After editing, print-preview it to check it still fits on one page.
+- **CSS/JS changes:** GitHub Pages lets browsers cache files for 10 minutes, so bump the `?v=` date on every
+  `./assets/css/…` and `./assets/js/…` link in both pages. Otherwise returning visitors get new HTML with old styles.
 
 ## Contact
 
