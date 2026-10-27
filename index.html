@@ -192,7 +192,7 @@
         <button type="button" class="tab" data-filter="all" aria-pressed="true">All <span class="count"></span></button>
         <button type="button" class="tab" data-filter="live" aria-pressed="false">Try it live <span class="count"></span></button>
         <button type="button" class="tab" data-filter="python" aria-pressed="false">Python <span class="count"></span></button>
-        <button type="button" class="tab" data-filter="java" aria-pressed="false">Java <span class="count"></span></button>
+        <button type="button" class="tab" data-filter="java" aria-pressed="false">Java / Kotlin <span class="count"></span></button>
         <button type="button" class="tab" data-filter="js" aria-pressed="false">JS / TS <span class="count"></span></button>
       </div>
     </div>
@@ -200,26 +200,27 @@
 
     <div class="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6" id="projectGrid">
 
-      <!-- AI Text Converter / AI Inline -->
-      <article class="card reveal lg:col-span-3" id="p-ai-inline" data-tags="js python live" data-title="AI Text Converter (Chrome extension)">
+      <!-- KNOWN -->
+      <article class="card reveal lg:col-span-3" id="p-known" data-tags="js live" data-title="KNOWN (Gloo AI Hackathon)">
         <div class="card-media">
-          <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>Chrome Web Store · AI Inline</span></div>
-          <img class="aspect-[16/7] object-center" src="./assets/img/projects/extension-inline-640.webp" width="640" height="260" loading="lazy" decoding="async"
-               alt="The extension's Shakespeare and Brainrot buttons floating above a selected sentence in a text box." />
+          <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>potat4190.github.io/KNOWN</span></div>
+          <img class="aspect-[16/9] object-top" src="./assets/img/projects/known-560.jpg" width="560" height="450" loading="lazy" decoding="async"
+               alt="KNOWN's first screen asking you to choose a language: English, Burmese, Simplified Chinese, Japanese or Arabic." />
         </div>
         <div class="flex flex-1 flex-col p-6">
-          <div class="mb-3 flex flex-wrap gap-2"><span class="badge badge-live">On the Chrome Web Store</span></div>
-          <h3 class="font-display text-2xl font-bold tracking-tight">AI Text Converter</h3>
+          <div class="mb-3 flex flex-wrap gap-2"><span class="badge badge-team">Gloo AI Hackathon 2026 · team project</span></div>
+          <h3 class="font-display text-2xl font-bold tracking-tight">KNOWN</h3>
           <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-            Highlight text in any input, textarea or rich-text box and rewrite it in place, in Shakespearean English or in "brainrot" for now.
-            The extension is JavaScript. A small Python FastAPI service I wrote sends the text to Google Gemini and returns the rewrite.
+            We built this as a team for the Bible track of the Gloo 2026 AI Hackathon. It's for the moment you're carrying something you can't put into words:
+            you name what feels closest, meet someone in Scripture who carried something similar, read the passage, pray, then pick a next step.
+            An on-device matcher keeps it working offline, and AI calls go through a relay so no keys live on the phone.
           </p>
           <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Built with">
-            <li class="tag">JavaScript</li><li class="tag">Chrome Extensions API</li><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Gemini API</li>
+            <li class="tag">TypeScript</li><li class="tag">React Native</li><li class="tag">Expo</li><li class="tag">Jest</li><li class="tag">YouVersion SDK</li>
           </ul>
           <div class="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 pt-6">
-            <a class="link-arrow" href="https://chromewebstore.google.com/detail/aipkheflklpdkjkoffchgedfgkbhnjik" target="_blank" rel="noopener noreferrer">Install from the Web Store <svg><use href="#i-arrow"/></svg></a>
-            <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener noreferrer" aria-label="AI Text Converter source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow" href="https://potat4190.github.io/KNOWN/" target="_blank" rel="noopener noreferrer">Try the web build <svg><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/KNOWN-app" target="_blank" rel="noopener noreferrer" aria-label="KNOWN source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
           </div>
         </div>
       </article>
@@ -248,33 +249,59 @@
         </div>
       </article>
 
-      <!-- KNOWN -->
-      <article class="card reveal lg:col-span-3" id="p-known" data-tags="js live" data-title="KNOWN (Gloo AI Hackathon)">
-        <div class="card-media">
-          <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>potat4190.github.io/KNOWN</span></div>
-          <img class="aspect-[16/9] object-top" src="./assets/img/projects/known-560.jpg" width="560" height="450" loading="lazy" decoding="async"
-               alt="KNOWN's first screen asking you to choose a language: English, Burmese, Simplified Chinese, Japanese or Arabic." />
+      <!-- SafeBrowse -->
+      <article class="card reveal lg:col-span-3" id="p-safebrowse" data-tags="java" data-title="SafeBrowse (Android site blocker)">
+        <div class="card-media term flex flex-col justify-center gap-1 overflow-x-auto px-5 py-6" aria-hidden="true">
+          <div class="whitespace-pre"><span class="p">dns</span>      <span class="c">reddit.com</span>     <span class="dim">blocked →</span> NXDOMAIN</div>
+          <div class="whitespace-pre"><span class="p">dns</span>      <span class="c">wikipedia.org</span>  <span class="dim">allowed →</span> 1.1.1.1</div>
+          <div class="whitespace-pre"><span class="p">block</span>    <span class="dim">one tap</span></div>
+          <div class="whitespace-pre"><span class="p">unblock</span>  <span class="dim">read Romans 6:1–23, then a word check</span></div>
         </div>
         <div class="flex flex-1 flex-col p-6">
-          <div class="mb-3 flex flex-wrap gap-2"><span class="badge badge-team">Gloo AI Hackathon 2026 · team project</span></div>
-          <h3 class="font-display text-2xl font-bold tracking-tight">KNOWN</h3>
+          <div class="mb-3 flex flex-wrap gap-2"><span class="badge">Android app</span></div>
+          <h3 class="font-display text-2xl font-bold tracking-tight">SafeBrowse</h3>
           <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-            We built this as a team for the Bible track of the Gloo 2026 AI Hackathon. It's for the moment you're carrying something you can't put into words:
-            you name what feels closest, meet someone in Scripture who carried something similar, read the passage, pray, then pick a next step.
-            An on-device matcher keeps it working offline, and AI calls go through a relay so no keys live on the phone.
+            A site blocker that's easy to turn on and slow to turn off. Blocking takes one tap; unblocking a site, or switching protection off,
+            means reading all 23 verses of Romans 6 at reading pace and passing a word check. It filters DNS through a local VpnService, so incognito
+            changes nothing and no traffic is sent to a remote server.
           </p>
           <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Built with">
-            <li class="tag">TypeScript</li><li class="tag">React Native</li><li class="tag">Expo</li><li class="tag">Jest</li><li class="tag">YouVersion SDK</li>
+            <li class="tag">Kotlin</li><li class="tag">Android VpnService</li><li class="tag">Room</li><li class="tag">Kotlin Flow</li><li class="tag">Gradle</li>
+          </ul>
+          <div class="mt-auto pt-6">
+            <a class="link-arrow" href="https://github.com/potat4190/SafeBrowse" target="_blank" rel="noopener noreferrer" aria-label="SafeBrowse source code on GitHub">Source and build guide <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Ainos -->
+      <article class="card reveal lg:col-span-3" id="p-ainos" data-tags="js live" data-title="Ainos (worship music streaming)" style="--i:1">
+        <div class="card-media term flex flex-col justify-center gap-1 overflow-x-auto px-5 py-6" aria-hidden="true">
+          <div class="whitespace-pre"><span class="p">stream</span>   <span class="dim">signed URL · HTTP Range chunks</span></div>
+          <div class="whitespace-pre"><span class="p">loudness</span> <span class="dim">ITU-R BS.1770 →</span> <span class="c">normalized</span></div>
+          <div class="whitespace-pre"><span class="p">next</span>     <span class="dim">prefetched on a second deck</span></div>
+          <div class="whitespace-pre"><span class="p">play</span>     <span class="dim">counts as a stream at</span> <span class="c">0:30</span></div>
+        </div>
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex flex-wrap gap-2"><span class="badge badge-live">Live on Vercel</span></div>
+          <h3 class="font-display text-2xl font-bold tracking-tight">Ainos</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+            A streaming app for Christian worship music, named after the Greek word for praise. It works the way a big streaming service does:
+            chunked audio behind signed URLs, loudness normalization, next-track prefetching, offline downloads, and recommendations
+            (Discover Weekly, Daily Mixes, Radio) in six languages, including Nepali and Hindi. A second device can take over playback from the first.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Built with">
+            <li class="tag">JavaScript</li><li class="tag">Node.js</li><li class="tag">SQLite</li><li class="tag">Supabase Postgres</li><li class="tag">Server-Sent Events</li><li class="tag">Vercel</li>
           </ul>
           <div class="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 pt-6">
-            <a class="link-arrow" href="https://potat4190.github.io/KNOWN/" target="_blank" rel="noopener noreferrer">Try the web build <svg><use href="#i-arrow"/></svg></a>
-            <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/KNOWN-app" target="_blank" rel="noopener noreferrer" aria-label="KNOWN source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow" href="https://ainos-liard.vercel.app/" target="_blank" rel="noopener noreferrer">Open the app <svg><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/Ainos" target="_blank" rel="noopener noreferrer" aria-label="Ainos source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
           </div>
         </div>
       </article>
 
       <!-- AI Spotify Playlist Maker -->
-      <article class="card reveal lg:col-span-3" id="p-spotify" data-tags="python" data-title="AI Spotify Playlist Maker" style="--i:1">
+      <article class="card reveal lg:col-span-3" id="p-spotify" data-tags="python" data-title="AI Spotify Playlist Maker">
         <div class="card-media">
           <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>AI Playlist Creator · desktop app</span></div>
           <img class="aspect-[16/9] object-left-top" src="./assets/img/projects/playlist-1280.webp"
@@ -297,6 +324,30 @@
           <div class="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 pt-6">
             <a class="link-arrow" href="https://github.com/potat4190/AiSpotifyPlaylistMaker#readme" target="_blank" rel="noopener noreferrer">Setup guide <svg><use href="#i-arrow"/></svg></a>
             <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/AiSpotifyPlaylistMaker" target="_blank" rel="noopener noreferrer" aria-label="AI Spotify Playlist Maker source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- AI Text Converter / AI Inline -->
+      <article class="card reveal lg:col-span-3" id="p-ai-inline" data-tags="js python live" data-title="AI Text Converter (Chrome extension)" style="--i:1">
+        <div class="card-media">
+          <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>Chrome Web Store · AI Inline</span></div>
+          <img class="aspect-[16/7] object-center" src="./assets/img/projects/extension-inline-640.webp" width="640" height="260" loading="lazy" decoding="async"
+               alt="The extension's Shakespeare and Brainrot buttons floating above a selected sentence in a text box." />
+        </div>
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-3 flex flex-wrap gap-2"><span class="badge badge-live">On the Chrome Web Store</span></div>
+          <h3 class="font-display text-2xl font-bold tracking-tight">AI Text Converter</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+            Highlight text in any input, textarea or rich-text box and rewrite it in place, in Shakespearean English or in "brainrot" for now.
+            The extension is JavaScript. A small Python FastAPI service I wrote sends the text to Google Gemini and returns the rewrite.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Built with">
+            <li class="tag">JavaScript</li><li class="tag">Chrome Extensions API</li><li class="tag">Python</li><li class="tag">FastAPI</li><li class="tag">Gemini API</li>
+          </ul>
+          <div class="mt-auto flex flex-wrap items-center gap-x-5 gap-y-1 pt-6">
+            <a class="link-arrow" href="https://chromewebstore.google.com/detail/aipkheflklpdkjkoffchgedfgkbhnjik" target="_blank" rel="noopener noreferrer">Install from the Web Store <svg><use href="#i-arrow"/></svg></a>
+            <a class="link-arrow text-muted-foreground" href="https://github.com/potat4190/textConvertExtension" target="_blank" rel="noopener noreferrer" aria-label="AI Text Converter source code on GitHub">Source <svg><use href="#i-arrow"/></svg></a>
           </div>
         </div>
       </article>
